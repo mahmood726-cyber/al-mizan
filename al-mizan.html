@@ -1017,9 +1017,10 @@ textarea { resize: vertical; min-height: 100px; font-family: var(--font-mono); f
     if (k === 0) return null;
     if (k === 1) {
       var z1 = sei[0] > 0 ? yi[0] / sei[0] : 0;
+      var zCrit1 = normalQuantile(1 - 0.05 / 2); // P1-1 fix: use quantile not hardcoded 1.96
       return {
         theta: yi[0], se: sei[0], tau2: 0, I2: 0, Q: 0, z: z1,
-        ciLo: yi[0] - 1.96 * sei[0], ciHi: yi[0] + 1.96 * sei[0], k: 1, p: 2 * (1 - normalCDF(Math.abs(z1)))
+        ciLo: yi[0] - zCrit1 * sei[0], ciHi: yi[0] + zCrit1 * sei[0], k: 1, p: 2 * (1 - normalCDF(Math.abs(z1)))
       };
     }
     var wi = [], sumW = 0, sumWY = 0;
@@ -1122,8 +1123,16 @@ textarea { resize: vertical; min-height: 100px; font-family: var(--font-mono); f
     var I2frac = I2pct / 100;
     var D2 = I2frac < 1 ? I2frac / (1 - I2frac) : 10; // cap
 
-    var lnRR = Math.log(rrTarget);
-    var ris = computeRIS(alpha, power, lnRR, D2);
+    // P1-3 fix: handle MD (difference) vs ratio measures differently
+    var isRatio = appState.sortedStudies && appState.sortedStudies[0] && appState.sortedStudies[0].isRatio;
+    var effectDenom;
+    if (isRatio !== false) {
+      effectDenom = Math.log(rrTarget); // log(RR) for ratio measures
+    } else {
+      effectDenom = rrTarget; // raw MD for difference measures
+    }
+    if (Math.abs(effectDenom) < 1e-10) effectDenom = 0.1; // guard zero
+    var ris = computeRIS(alpha, power, effectDenom, D2);
 
     var tsaSteps = [];
     var tippingIndex = -1;
@@ -1454,6 +1463,11 @@ textarea { resize: vertical; min-height: 100px; font-family: var(--font-mono); f
 
       if (!name || !year || !effect || !ciLo || !ciHi || !nExp || !nCtrl) {
         alert('Please fill in all fields.');
+        return;
+      }
+      // P1-4 fix: validate year is a reasonable number
+      if (isNaN(parseInt(year)) || parseInt(year) < 1900 || parseInt(year) > 2100) {
+        alert('Please enter a valid year (1900-2100).');
         return;
       }
       var s = parseStudy(name, year, type, parseFloat(effect), parseFloat(ciLo), parseFloat(ciHi), parseInt(nExp), parseInt(nCtrl));
