@@ -1247,6 +1247,10 @@ textarea { resize: vertical; min-height: 100px; font-family: var(--font-mono); f
     var isRatio = (type === 'RR' || type === 'OR' || type === 'HR');
     var logEff, seLog;
     if (isRatio) {
+      // Guard: ratio measures must be > 0 for log transform
+      effect = Math.max(0.001, parseFloat(effect) || 1);
+      ciLo = Math.max(0.001, parseFloat(ciLo) || 0.5);
+      ciHi = Math.max(0.001, parseFloat(ciHi) || 2.0);
       logEff = Math.log(effect);
       var logLo = Math.log(ciLo);
       var logHi = Math.log(ciHi);
@@ -1534,9 +1538,10 @@ textarea { resize: vertical; min-height: 100px; font-family: var(--font-mono); f
   function runAnalysis() {
     if (appState.studies.length < 1) return;
 
-    var alpha = parseFloat($('settingAlpha').value) || 0.05;
-    var power = parseFloat($('settingPower').value) || 0.80;
+    var alpha = Math.max(0.001, Math.min(0.2, parseFloat($('settingAlpha').value) || 0.05));
+    var power = Math.max(0.5, Math.min(0.99, parseFloat($('settingPower').value) || 0.80));
     var rrTarget = parseFloat($('settingRRtarget').value) || 0.85;
+    if (rrTarget <= 0 || rrTarget === 1) rrTarget = 0.85; // Prevent log(0) and log(1)=0 → infinite RIS
 
     var cum = cumulativeMeta(appState.studies);
     appState.sortedStudies = cum.sorted;
