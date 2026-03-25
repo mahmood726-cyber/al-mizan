@@ -165,7 +165,7 @@ class AlMizanTests(unittest.TestCase):
         self.assertTrue(csv.is_displayed())
 
     def test_10_input_mode_examples(self):
-        """Selecting examples radio shows 3 example buttons."""
+        """Selecting examples radio shows 4 example buttons."""
         self._reload()
         radio = self.driver.find_element(By.CSS_SELECTOR, 'input[name="inputMode"][value="examples"]')
         self.driver.execute_script("arguments[0].click()", radio)
@@ -173,7 +173,7 @@ class AlMizanTests(unittest.TestCase):
         examples = self.driver.find_element(By.ID, 'examplesSection')
         self.assertTrue(examples.is_displayed())
         btns = examples.find_elements(By.CSS_SELECTOR, '.example-btn')
-        self.assertEqual(len(btns), 3)
+        self.assertEqual(len(btns), 4)
 
     # ─── 5. LOAD STEROIDS DATASET ───
     def test_11_load_steroids(self):
@@ -236,10 +236,10 @@ class AlMizanTests(unittest.TestCase):
 
     # ─── 6. LOAD TXA DATASET ───
     def test_17_load_txa(self):
-        """Loading TXA dataset populates 3 studies."""
+        """Loading TXA dataset populates 7 studies."""
         self._load_example('exTXA')
         count_label = self.driver.find_element(By.ID, 'studyCountLabel')
-        self.assertIn('3', count_label.text)
+        self.assertIn('7', count_label.text)
 
     def test_18_txa_analysis_verdict(self):
         """TXA dataset produces a valid verdict (GREEN or AMBER)."""

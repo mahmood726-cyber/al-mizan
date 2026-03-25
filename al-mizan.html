@@ -738,8 +738,13 @@ textarea { resize: vertical; min-height: 100px; font-family: var(--font-mono); f
         </button>
         <button class="example-btn" id="exTXA" tabindex="0" aria-label="Load Tranexamic Acid dataset">
           <div class="ex-title">Tranexamic Acid for Bleeding</div>
-          <div class="ex-desc">3 RCTs (2010-2020). CRASH-2 demonstrated survival benefit from TXA in trauma.</div>
+          <div class="ex-desc">7 RCTs (2010-2023). CRASH-2 demonstrated survival benefit from TXA in trauma.</div>
           <span class="ex-tag tag-benefit">BENEFIT EMERGING</span>
+        </button>
+        <button class="example-btn" id="exBetaBlockers" tabindex="0" aria-label="Load Beta-Blockers Post-MI dataset">
+          <div class="ex-title">Beta-Blockers Post-MI</div>
+          <div class="ex-desc">10 RCTs (1965-1986). Evidence tipped early but trials continued for decades.</div>
+          <span class="ex-tag tag-benefit">BENEFIT SIGNAL</span>
         </button>
         <button class="example-btn" id="exGlucose" tabindex="0" aria-label="Load Intensive Glucose Control dataset">
           <div class="ex-title">Intensive Glucose Control in ICU</div>
@@ -1364,9 +1369,29 @@ textarea { resize: vertical; min-height: 100px; font-family: var(--font-mono); f
       label: 'Tranexamic Acid for Bleeding',
       type: 'RR',
       studies: [
-        ['CRASH-2 2010',  2010, 'RR', 0.91, 0.85, 0.97, 10060, 10067],
-        ['WOMAN 2017',    2017, 'RR', 0.81, 0.65, 1.00, 10036,  9985],
-        ['HALT-IT 2020',  2020, 'RR', 0.97, 0.92, 1.03,  5994,  5981]
+        ['CRASH-2 2010',           2010, 'RR', 0.91, 0.85, 0.97, 10060, 10067],
+        ['MATTERS 2012',           2012, 'RR', 0.61, 0.40, 0.94,   148,   148],
+        ['WOMAN 2017',             2017, 'RR', 0.81, 0.65, 1.00, 10036,  9985],
+        ['Shakur-Still CRASH-3 2019', 2019, 'RR', 0.89, 0.80, 1.00, 4613, 4514],
+        ['HALT-IT 2020',           2020, 'RR', 0.97, 0.92, 1.03,  5994,  5981],
+        ['STAAMP 2020',            2020, 'RR', 0.98, 0.84, 1.15,   447,   456],
+        ['PATCH 2023',             2023, 'RR', 1.02, 0.88, 1.18,   501,   502]
+      ]
+    },
+    betablockers: {
+      label: 'Beta-Blockers Post-MI',
+      type: 'RR',
+      studies: [
+        ['Propranolol 1965',   1965, 'RR', 0.97, 0.43, 2.19,   18,   20],
+        ['Snow 1965',          1965, 'RR', 0.59, 0.20, 1.73,   30,   36],
+        ['Balcon 1966',        1966, 'RR', 0.56, 0.18, 1.76,   57,   57],
+        ['Clausen 1966',       1966, 'RR', 0.76, 0.36, 1.58,   55,   75],
+        ['Multicentre 1966',   1966, 'RR', 0.67, 0.52, 0.87, 1533, 1520],
+        ['Barber 1967',        1967, 'RR', 0.76, 0.46, 1.27,  165,  172],
+        ['Norris 1968',        1968, 'RR', 0.62, 0.27, 1.39,   68,   48],
+        ['Norwegian 1981',     1981, 'RR', 0.63, 0.47, 0.84,  945,  939],
+        ['BHAT 1982',          1982, 'RR', 0.74, 0.61, 0.89, 1916, 1921],
+        ['ISIS-1 1986',        1986, 'RR', 0.93, 0.85, 1.02, 8037, 7990]
       ]
     },
     glucose: {
@@ -1586,9 +1611,10 @@ textarea { resize: vertical; min-height: 100px; font-family: var(--font-mono); f
   function setupExamples() {
     $('exSteroids').addEventListener('click', function() { loadDataset('steroids'); });
     $('exTXA').addEventListener('click', function() { loadDataset('txa'); });
+    $('exBetaBlockers').addEventListener('click', function() { loadDataset('betablockers'); });
     $('exGlucose').addEventListener('click', function() { loadDataset('glucose'); });
     // Keyboard support
-    ['exSteroids', 'exTXA', 'exGlucose'].forEach(function(id) {
+    ['exSteroids', 'exTXA', 'exBetaBlockers', 'exGlucose'].forEach(function(id) {
       $(id).addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.target.click(); }
       });
