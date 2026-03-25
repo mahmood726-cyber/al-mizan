@@ -115,7 +115,7 @@ Al-Mizan provides a freely accessible tool for monitoring evidence equipoise, de
 
 ## Data availability
 
-The tool is available at [GITHUB_URL_PLACEHOLDER]. All built-in datasets use published trial-level data from Cochrane reviews.
+The tool is available at https://github.com/mahmood726-cyber/al-mizan. All built-in datasets use published trial-level data from Cochrane reviews.
 
 ## Funding
 
