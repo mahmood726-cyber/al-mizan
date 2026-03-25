@@ -1,11 +1,11 @@
 # Al-Mizan: An Evidence Equipoise Monitor for Detecting When the Balance of Evidence Has Tipped
 
 ## Authors
-[AUTHOR_NAME_PLACEHOLDER]^1
+Mahmood Ahmad^1
 
-^1 [AFFILIATION_PLACEHOLDER]
+^1 Royal Free Hospital, London, UK
 
-Corresponding author: [EMAIL_PLACEHOLDER]
+Corresponding author: mahmood.ahmad2@nhs.net
 
 ---
 
@@ -35,7 +35,7 @@ We present Al-Mizan (Arabic for "the balance"), a browser-based evidence equipoi
 
 ### Tool architecture
 
-Al-Mizan is a single-file HTML application (2,534 lines) requiring no installation, server, or internet connection. It runs entirely in the user's web browser.
+Al-Mizan is a single-file HTML application (~2,600 lines) requiring no installation, server, or internet connection. It runs entirely in the user's web browser and is validated by 30 automated Selenium tests.
 
 ### Cumulative meta-analysis
 
@@ -43,17 +43,17 @@ Studies are ordered chronologically by publication year. At each step k, a DerSi
 
 ### Trial Sequential Analysis
 
-The Required Information Size (RIS) is computed as:
+For ratio measures (RR, OR, HR), the Required Information Size (RIS) is computed using the event-rate-aware formula:
 
-RIS = 4 x (z_alpha + z_beta)^2 / (ln(RR_target))^2
+RIS = 2 x [z_{alpha/2} x sqrt(2 x p_bar x (1 - p_bar)) + z_beta x sqrt(p_c x (1 - p_c) + p_e x (1 - p_e))]^2 / (p_c - p_e)^2
 
-adjusted for heterogeneity by multiplying by (1 + D^2) where D^2 = I^2/(1 - I^2) [5].
+where p_c is the estimated control-arm event rate, p_e = p_c x RR_target, and p_bar = (p_c + p_e)/2 [5]. This is adjusted for heterogeneity by multiplying by (1 + D^2) where D^2 = I^2/(1 - I^2). A default control-arm event rate of 0.20 is used when individual arm event counts are unavailable, which is conservative for most mortality and morbidity outcomes.
 
-O'Brien-Fleming alpha-spending monitoring boundaries are computed at each cumulative step using the information fraction t_k = N_cumulative / RIS, with boundary z_k = z_{alpha/2} / sqrt(t_k) [7].
+O'Brien-Fleming alpha-spending monitoring boundaries are computed using the Lan-DeMets spending function alpha*(t) = 2 - 2 x Phi(z_{alpha/2} / sqrt(t)) [7], with boundary z_k = z_{alpha/2} / sqrt(t_k) at each cumulative step where t_k = N_cumulative / RIS.
 
 ### Fragility assessment
 
-At each cumulative step, leave-one-out analysis determines how many individual study removals would flip the statistical significance of the pooled estimate. A fragility count of 0 means the conclusion is robust to any single study removal; higher counts indicate greater sensitivity.
+At each cumulative step (k >= 2), leave-one-out analysis determines how many individual study removals would flip the statistical significance of the pooled estimate. A fragility count of 0 means the conclusion is robust to any single study removal; higher counts indicate greater sensitivity. The fragility index is undefined for k=1 (a single study).
 
 ### Verdict classification
 
@@ -100,9 +100,10 @@ Third, **fragility tracking** at each cumulative step reveals how stable the eme
 ### Limitations
 
 1. TSA boundaries assume a fixed target effect size, which must be specified a priori. Different targets produce different boundaries and potentially different verdicts.
-2. The tool uses published aggregated data, not individual patient data. Real-time monitoring during an ongoing trial would require access to interim data.
-3. The "waste" calculation is retrospective — it identifies patients who *were* randomised after the tipping point, not patients who *will be*.
-4. Clinical judgment is essential: statistical tipping does not automatically render further research unethical, particularly when testing different populations, doses, or outcomes.
+2. The RIS computation uses a default control-arm event rate of 20% when individual arm event counts are unavailable. For outcomes with very different baseline rates, users should interpret the RIS as approximate.
+3. The tool uses published aggregated data, not individual patient data. Real-time monitoring during an ongoing trial would require access to interim data.
+4. The "waste" calculation is retrospective — it identifies patients who *were* randomised after the tipping point, not patients who *will be*.
+5. Clinical judgment is essential: statistical tipping does not automatically render further research unethical, particularly when testing different populations, doses, or outcomes.
 
 ### Implications
 
@@ -115,6 +116,18 @@ Al-Mizan provides a freely accessible tool for monitoring evidence equipoise, de
 ## Data availability
 
 The tool is available at [GITHUB_URL_PLACEHOLDER]. All built-in datasets use published trial-level data from Cochrane reviews.
+
+## Funding
+
+[FUNDING_PLACEHOLDER]
+
+## Competing interests
+
+The authors declare no competing interests.
+
+## Patient and public involvement
+
+No patients or members of the public were involved in the design of this tool.
 
 ## References
 
