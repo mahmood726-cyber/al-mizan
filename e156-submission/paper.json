@@ -1,0 +1,97 @@
+{
+  "title": "Al-Mizan: An Evidence Equipoise Monitor for Detecting When the Balance of Evidence Has Tipped",
+  "slug": "al-mizan",
+  "author": "Mahmood Ahmad",
+  "date": "2026-03-26",
+  "body": "When has accumulating trial evidence already answered a clinical question, and how many participants were subsequently enrolled after equipoise had effectively ended? We built an evidence equipoise monitor that combines cumulative meta-analysis, Trial Sequential Analysis boundaries, leave-one-out fragility checks, and post-tipping waste estimates across three clinical exemplars. Al-Mizan applies O'Brien-Fleming alpha-spending boundaries to the cumulative Z-statistic at each chronological study entry and classifies the evidence state as tipped, trending, or still in equipoise. In corticosteroids for traumatic brain injury, the monitoring boundary was crossed before the CRASH trial randomised 10,008 patients, with post-tipping enrolment associated with a risk ratio of 1.05 (95% CI 1.01 to 1.10). Leave-one-out analyses showed that the corticosteroid and tranexamic acid exemplars were not reversed by removal of any single study. Real-time evidence monitoring could reduce avoidable recruitment into trials that continue after the main question has already been answered. The approach depends on the published evidence base and cannot account for unpublished negative studies or delayed data release.",
+  "word_count": 163,
+  "sentence_count": 7,
+  "sentences": [
+    {
+      "role": "Question",
+      "text": "When has accumulating trial evidence already answered a clinical question, and how many participants were subsequently enrolled after equipoise had effectively ended?"
+    },
+    {
+      "role": "Dataset",
+      "text": "We built an evidence equipoise monitor that combines cumulative meta-analysis, Trial Sequential Analysis boundaries, leave-one-out fragility checks, and post-tipping waste estimates across three clinical exemplars."
+    },
+    {
+      "role": "Method",
+      "text": "Al-Mizan applies O'Brien-Fleming alpha-spending boundaries to the cumulative Z-statistic at each chronological study entry and classifies the evidence state as tipped, trending, or still in equipoise."
+    },
+    {
+      "role": "Primary result",
+      "text": "In corticosteroids for traumatic brain injury, the monitoring boundary was crossed before the CRASH trial randomised 10,008 patients, with post-tipping enrolment associated with a risk ratio of 1.05 (95% CI 1.01 to 1.10)."
+    },
+    {
+      "role": "Robustness",
+      "text": "Leave-one-out analyses showed that the corticosteroid and tranexamic acid exemplars were not reversed by removal of any single study."
+    },
+    {
+      "role": "Interpretation",
+      "text": "Real-time evidence monitoring could reduce avoidable recruitment into trials that continue after the main question has already been answered."
+    },
+    {
+      "role": "Boundary",
+      "text": "The approach depends on the published evidence base and cannot account for unpublished negative studies or delayed data release."
+    }
+  ],
+  "notes": {
+    "app": "Al-Mizan v1.0",
+    "data": "Three clinical exemplars: corticosteroids in TBI, tranexamic acid, intensive glucose control",
+    "code": "https://github.com/mahmood726-cyber/al-mizan",
+    "doi": "",
+    "version": "1.0",
+    "date": "2026-03-26",
+    "certainty": "moderate",
+    "validation": "Author reviewed draft"
+  },
+  "type": "methods",
+  "primary_estimand": "Cumulative Z-statistic crossing Trial Sequential Analysis boundary",
+  "validation": {
+    "status": "fail",
+    "checks": [
+      {
+        "name": "single paragraph",
+        "ok": true,
+        "detail": "Body must not contain blank-line paragraph breaks."
+      },
+      {
+        "name": "sentence count",
+        "ok": true,
+        "detail": "Found 7 sentences."
+      },
+      {
+        "name": "word count",
+        "ok": false,
+        "detail": "Found 163 words."
+      },
+      {
+        "name": "no headings",
+        "ok": true,
+        "detail": "No markdown headings allowed in body."
+      },
+      {
+        "name": "no links",
+        "ok": true,
+        "detail": "No links or DOI links allowed in body."
+      },
+      {
+        "name": "result sentence has interval",
+        "ok": true,
+        "detail": "Sentence 4 should include a confidence interval."
+      },
+      {
+        "name": "result sentence has estimand",
+        "ok": true,
+        "detail": "Sentence 4 should name an effect measure or test metric."
+      },
+      {
+        "name": "boundary sentence present",
+        "ok": true,
+        "detail": "Sentence 7 should express a limitation, harm, or scope boundary."
+      }
+    ]
+  },
+  "schema": "e156-v0.2"
+}

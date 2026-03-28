@@ -1,0 +1,61 @@
+{
+  "title": "Al-Mizan: An Evidence Equipoise Monitor for Detecting When the Balance of Evidence Has Tipped",
+  "slug": "al-mizan",
+  "path": "C:\\AlMizan",
+  "type": "methods",
+  "primary_estimand": "Cumulative Z-statistic crossing Trial Sequential Analysis boundary",
+  "certainty": "moderate",
+  "summary": "Real-time evidence monitoring with Trial Sequential Analysis and waste quantification identifies when clinical questions are already answered and patients are enrolled unnecessarily.",
+  "study_count": null,
+  "participant_count": null,
+  "body": "When has accumulating trial evidence already answered a clinical question, and how many participants were subsequently enrolled after equipoise had effectively ended? We built an evidence equipoise monitor that combines cumulative meta-analysis, Trial Sequential Analysis boundaries, leave-one-out fragility checks, and post-tipping waste estimates across three clinical exemplars. Al-Mizan applies O'Brien-Fleming alpha-spending boundaries to the cumulative Z-statistic at each chronological study entry and classifies the evidence state as tipped, trending, or still in equipoise. In corticosteroids for traumatic brain injury, the monitoring boundary was crossed before the CRASH trial randomised 10,008 patients, with post-tipping enrolment associated with a risk ratio of 1.05 (95% CI 1.01 to 1.10). Leave-one-out analyses showed that the corticosteroid and tranexamic acid exemplars were not reversed by removal of any single study. Real-time evidence monitoring could reduce avoidable recruitment into trials that continue after the main question has already been answered. The approach depends on the published evidence base and cannot account for unpublished negative studies or delayed data release.",
+  "notes": {
+    "app": "Al-Mizan v1.0",
+    "data": "Three clinical exemplars: corticosteroids in TBI, tranexamic acid, intensive glucose control",
+    "code": "https://github.com/mahmood726-cyber/al-mizan",
+    "doi": "",
+    "version": "1.0",
+    "date": "2026-03-26",
+    "certainty": "moderate",
+    "validation": "Author reviewed draft"
+  },
+  "author": "Mahmood Ahmad",
+  "date": "2026-03-26",
+  "sentences": [
+    {
+      "role": "Question",
+      "text": "When has accumulating trial evidence already answered a clinical question, and how many participants were subsequently enrolled after equipoise had effectively ended?"
+    },
+    {
+      "role": "Dataset",
+      "text": "We built an evidence equipoise monitor that combines cumulative meta-analysis, Trial Sequential Analysis boundaries, leave-one-out fragility checks, and post-tipping waste estimates across three clinical exemplars."
+    },
+    {
+      "role": "Method",
+      "text": "Al-Mizan applies O'Brien-Fleming alpha-spending boundaries to the cumulative Z-statistic at each chronological study entry and classifies the evidence state as tipped, trending, or still in equipoise."
+    },
+    {
+      "role": "Primary result",
+      "text": "In corticosteroids for traumatic brain injury, the monitoring boundary was crossed before the CRASH trial randomised 10,008 patients, with post-tipping enrolment associated with a risk ratio of 1.05 (95% CI 1.01 to 1.10)."
+    },
+    {
+      "role": "Robustness",
+      "text": "Leave-one-out analyses showed that the corticosteroid and tranexamic acid exemplars were not reversed by removal of any single study."
+    },
+    {
+      "role": "Interpretation",
+      "text": "Real-time evidence monitoring could reduce avoidable recruitment into trials that continue after the main question has already been answered."
+    },
+    {
+      "role": "Boundary",
+      "text": "The approach depends on the published evidence base and cannot account for unpublished negative studies or delayed data release."
+    }
+  ],
+  "affiliation": "Tahir Heart Institute",
+  "email": "mahmood.ahmad2@nhs.net",
+  "references": [
+    "Walsh M, Srinathan SK, McAuley DF, et al. The statistical significance of randomized controlled trial results is frequently fragile: a case for a Fragility Index. J Clin Epidemiol. 2014;67(6):622-628.",
+    "Atal I, Porcher R, Boutron I, Ravaud P. The statistical significance of meta-analyses is frequently fragile: definition of a fragility index for meta-analyses. J Clin Epidemiol. 2019;111:32-40.",
+    "Borenstein M, Hedges LV, Higgins JPT, Rothstein HR. Introduction to Meta-Analysis. 2nd ed. Wiley; 2021."
+  ]
+}

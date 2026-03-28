@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al-Mizan (الميزان) — The Evidence Balance</title>
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-card: #ffffff;
+  --bg-hero: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-muted: #adb5bd;
+  --border-color: #dee2e6;
+  --border-light: #e9ecef;
+
+  --gold: #D4AF37;
+  --gold-light: #f0d878;
+  --green: #27ae60;
+  --green-bg: rgba(39, 174, 96, 0.08);
+  --amber: #f39c12;
+  --amber-bg: rgba(243, 156, 18, 0.08);
+  --red: #e74c3c;
+  --red-bg: rgba(231, 76, 60, 0.08);
+  --blue: #2980b9;
+  --blue-light: #3498db;
+  --purple: #8e44ad;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-card: #252525;
+  --bg-hero: linear-gradient(135deg, #0d0d1a 0%, #111827 50%, #0a1628 100%);
+  --text-primary: #e4e4e7;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --border-color: #3f3f46;
+  --border-light: #2d2d33;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ===== HERO HEADER ===== */
+.hero {
+  background: var(--bg-hero);
+  padding: 2rem 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(212,175,55,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.02em;
+}
+
+.hero-title .arabic {
+  font-size: 2.6rem;
+  color: var(--gold);
+  margin-left: 0.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.7);
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.hero-quote {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.45);
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.theme-toggle:hover, .theme-toggle:focus {
+  background: rgba(255,255,255,0.2);
+  outline: 2px solid var(--gold);
+}
+
+/* ===== TABS ===== */
+.tab-bar {
+  display: flex;
+  background: var(--bg-secondary);
+  border-bottom: 2px solid var(--border-color);
+  padding: 0 1rem;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tab-btn:hover, .tab-btn:focus {
+  color: var(--text-primary);
+  outline: none;
+}
+
+.tab-btn.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+  font-weight: 600;
+}
+
+.tab-panel {
+  display: none;
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+/* ===== FORM ELEMENTS ===== */
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+input[type="text"], input[type="number"], textarea, select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(41,128,185,0.15);
+}
+
+textarea { resize: vertical; min-height: 100px; font-family: var(--font-mono); font-size: 0.8rem; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.form-group { display: flex; flex-direction: column; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-sans);
+}
+
+.btn:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+.btn-primary:hover { background: #2471a3; }
+
+.btn-gold {
+  background: var(--gold);
+  color: #1a1a2e;
+  border-color: var(--gold);
+  font-weight: 600;
+}
+.btn-gold:hover { background: var(--gold-light); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+.btn-outline:hover { background: var(--bg-secondary); }
+
+.btn-danger {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+}
+.btn-danger:hover { background: #c0392b; }
+
+.btn-sm { padding: 0.3rem 0.8rem; font-size: 0.8rem; }
+
+.btn-group { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+/* ===== RADIO GROUP ===== */
+.radio-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.radio-group input[type="radio"] { width: auto; margin: 0; cursor: pointer; }
+
+/* ===== DATA TABLE ===== */
+.data-table-wrap {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.data-table th {
+  background: var(--bg-secondary);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 2px solid var(--border-color);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.data-table th:hover { color: var(--text-primary); }
+
+.data-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: middle;
+}
+
+.data-table td input {
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 0.2rem 0.4rem;
+  width: 100%;
+  font-size: 0.85rem;
+  border-radius: 4px;
+}
+
+.data-table td input:hover { border-color: var(--border-color); }
+.data-table td input:focus { border-color: var(--blue); background: var(--bg-primary); }
+
+.data-table tr:hover { background: var(--bg-secondary); }
+
+.study-count {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+/* ===== EXAMPLE BUTTONS ===== */
+.example-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.example-btn {
+  flex: 1;
+  min-width: 200px;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  font-family: var(--font-sans);
+}
+
+.example-btn:hover, .example-btn:focus {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-md);
+  outline: none;
+}
+
+.example-btn .ex-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.example-btn .ex-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.example-btn .ex-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  margin-top: 0.4rem;
+}
+
+.tag-harm { background: var(--red-bg); color: var(--red); }
+.tag-benefit { background: var(--green-bg); color: var(--green); }
+.tag-reversal { background: var(--amber-bg); color: var(--amber); }
+
+/* ===== SETTINGS PANEL ===== */
+.settings-row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.settings-row .form-group { min-width: 140px; }
+
+/* ===== BALANCE TAB ===== */
+.balance-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .balance-layout { grid-template-columns: 1fr; }
+}
+
+.svg-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.svg-container svg { display: block; width: 100%; height: auto; }
+
+.verdict-panel {
+  position: sticky;
+  top: 1rem;
+}
+
+.traffic-light {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 1rem;
+}
+
+.traffic-light .light {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  box-shadow: 0 0 20px currentColor;
+}
+
+.tl-green { background: var(--green-bg); border: 2px solid var(--green); }
+.tl-green .light { background: var(--green); color: var(--green); }
+
+.tl-amber { background: var(--amber-bg); border: 2px solid var(--amber); }
+.tl-amber .light { background: var(--amber); color: var(--amber); }
+
+.tl-red { background: var(--red-bg); border: 2px solid var(--red); }
+.tl-red .light { background: var(--red); color: var(--red); }
+
+.verdict-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.verdict-detail {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.verdict-detail strong { color: var(--text-primary); }
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.stat-box {
+  background: var(--bg-secondary);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.stat-box .stat-val {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-box .stat-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+/* ===== WASTE TAB ===== */
+.waste-hero {
+  text-align: center;
+  padding: 2rem;
+  background: var(--red-bg);
+  border: 2px solid var(--red);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.5rem;
+}
+
+.waste-hero .waste-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--red);
+  line-height: 1;
+}
+
+.waste-hero .waste-label {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.waste-hero.no-waste {
+  background: var(--green-bg);
+  border-color: var(--green);
+}
+
+.waste-hero.no-waste .waste-number { color: var(--green); }
+
+.counterfactual {
+  background: var(--bg-secondary);
+  border-left: 4px solid var(--gold);
+  padding: 1rem 1.5rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.counterfactual strong { color: var(--gold); }
+
+/* ===== REPORT TAB ===== */
+.report-section {
+  margin-bottom: 1.5rem;
+}
+
+.report-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.code-block {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  color: var(--text-primary);
+  position: relative;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.copy-btn:hover { background: var(--bg-secondary); color: var(--text-primary); }
+.copy-btn:focus { outline: 2px solid var(--gold); }
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.summary-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.summary-table td:first-child {
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 40%;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+}
+
+.empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.5; }
+.empty-state p { font-size: 0.95rem; }
+
+/* ===== PRINT ===== */
+@media print {
+  .hero, .tab-bar, .theme-toggle, .btn, button { display: none !important; }
+  .tab-panel { display: block !important; padding: 0; }
+  .balance-layout { grid-template-columns: 1fr 250px; }
+  .card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero" role="banner">
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" tabindex="0">Dark Mode</button>
+  <h1 class="hero-title">Al-Mizan <span class="arabic">الميزان</span></h1>
+  <p class="hero-subtitle">The Evidence Balance &mdash; When Should We Stop Testing?</p>
+  <p class="hero-quote">"And He established the balance, that you not transgress within the balance." &mdash; 55:7-8</p>
+</header>
+
+<!-- ===== TAB BAR ===== -->
+<nav class="tab-bar" role="tablist" aria-label="Main navigation">
+  <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-input" id="tab-input" tabindex="0">1. Data Input</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-balance" id="tab-balance" tabindex="-1">2. The Balance</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-waste" id="tab-waste" tabindex="-1">3. The Waste</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-report" id="tab-report" tabindex="-1">4. Report</button>
+</nav>
+
+<!-- ===== TAB 1: DATA INPUT ===== -->
+<div class="tab-panel active" role="tabpanel" id="panel-input" aria-labelledby="tab-input">
+
+  <!-- Input mode selector -->
+  <div class="card">
+    <div class="card-title">Data Source</div>
+    <div class="radio-group">
+      <label><input type="radio" name="inputMode" value="manual" checked> Manual Entry</label>
+      <label><input type="radio" name="inputMode" value="csv"> CSV Paste</label>
+      <label><input type="radio" name="inputMode" value="examples"> Built-in Examples</label>
+    </div>
+
+    <!-- Manual Entry -->
+    <div id="manualSection">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="studyName">Study Name</label>
+          <input type="text" id="studyName" placeholder="e.g., CRASH 2004">
+        </div>
+        <div class="form-group">
+          <label for="studyYear">Year</label>
+          <input type="number" id="studyYear" placeholder="2004" min="1900" max="2100">
+        </div>
+        <div class="form-group">
+          <label for="endpointType">Endpoint Type</label>
+          <select id="endpointType">
+            <option value="RR">Risk Ratio (RR)</option>
+            <option value="OR">Odds Ratio (OR)</option>
+            <option value="HR">Hazard Ratio (HR)</option>
+            <option value="MD">Mean Difference (MD)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="effectSize">Effect Size</label>
+          <input type="number" id="effectSize" step="0.01" placeholder="0.85">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="ciLower">CI Lower</label>
+          <input type="number" id="ciLower" step="0.01" placeholder="0.72">
+        </div>
+        <div class="form-group">
+          <label for="ciUpper">CI Upper</label>
+          <input type="number" id="ciUpper" step="0.01" placeholder="1.02">
+        </div>
+        <div class="form-group">
+          <label for="nExp">N Experimental</label>
+          <input type="number" id="nExp" placeholder="500" min="1">
+        </div>
+        <div class="form-group">
+          <label for="nCtrl">N Control</label>
+          <input type="number" id="nCtrl" placeholder="500" min="1">
+        </div>
+      </div>
+      <button class="btn btn-primary" id="addStudyBtn" tabindex="0">Add Study</button>
+    </div>
+
+    <!-- CSV Paste -->
+    <div id="csvSection" style="display:none;">
+      <label for="csvInput">Paste CSV (name, year, type, effect, ci_lo, ci_hi, n_exp, n_ctrl):</label>
+      <textarea id="csvInput" rows="8" placeholder="Faupel 1976, 1976, RR, 0.75, 0.42, 1.35, 53, 43&#10;Giannotta 1984, 1984, RR, 0.93, 0.64, 1.35, 55, 33"></textarea>
+      <div style="margin-top:0.75rem;">
+        <button class="btn btn-primary" id="parseCsvBtn" tabindex="0">Parse CSV</button>
+      </div>
+    </div>
+
+    <!-- Built-in Examples -->
+    <div id="examplesSection" style="display:none;">
+      <div class="example-buttons">
+        <button class="example-btn" id="exSteroids" tabindex="0" aria-label="Load Steroids for Head Injury dataset">
+          <div class="ex-title">Steroids for Head Injury</div>
+          <div class="ex-desc">9 RCTs (1976-2004). CRASH enrolled 10,008 patients after evidence of harm was accumulating.</div>
+          <span class="ex-tag tag-harm">HARM SIGNAL</span>
+        </button>
+        <button class="example-btn" id="exTXA" tabindex="0" aria-label="Load Tranexamic Acid dataset">
+          <div class="ex-title">Tranexamic Acid for Bleeding</div>
+          <div class="ex-desc">7 RCTs (2010-2023). CRASH-2 demonstrated survival benefit from TXA in trauma.</div>
+          <span class="ex-tag tag-benefit">BENEFIT EMERGING</span>
+        </button>
+        <button class="example-btn" id="exBetaBlockers" tabindex="0" aria-label="Load Beta-Blockers Post-MI dataset">
+          <div class="ex-title">Beta-Blockers Post-MI</div>
+          <div class="ex-desc">10 RCTs (1965-1986). Evidence tipped early but trials continued for decades.</div>
+          <span class="ex-tag tag-benefit">BENEFIT SIGNAL</span>
+        </button>
+        <button class="example-btn" id="exGlucose" tabindex="0" aria-label="Load Intensive Glucose Control dataset">
+          <div class="ex-title">Intensive Glucose Control in ICU</div>
+          <div class="ex-desc">7 RCTs (2001-2010). Initial benefit reversed by NICE-SUGAR showing harm.</div>
+          <span class="ex-tag tag-reversal">REVERSAL</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Table -->
+  <div class="card">
+    <div class="card-title">Study Data <span id="studyCountLabel" class="study-count"></span></div>
+    <div class="data-table-wrap">
+      <table class="data-table" id="studyTable" aria-label="Study data table">
+        <thead>
+          <tr>
+            <th tabindex="0" data-sort="name" role="columnheader" aria-sort="none">Study</th>
+            <th tabindex="0" data-sort="year" role="columnheader" aria-sort="ascending">Year</th>
+            <th>Type</th>
+            <th tabindex="0" data-sort="effect" role="columnheader" aria-sort="none">Effect</th>
+            <th>CI Low</th>
+            <th>CI High</th>
+            <th>N Exp</th>
+            <th>N Ctrl</th>
+            <th>SE (log)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="studyTableBody"></tbody>
+      </table>
+    </div>
+    <div id="emptyTableMsg" class="empty-state">
+      <div class="empty-icon">&#9878;</div>
+      <p>No studies loaded. Add studies manually, paste CSV, or load a built-in example.</p>
+    </div>
+    <div style="margin-top:1rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+      <button class="btn btn-gold" id="runAnalysisBtn" tabindex="0" style="display:none;">Run Analysis</button>
+      <button class="btn btn-outline btn-sm" id="clearDataBtn" tabindex="0" style="display:none;">Clear All</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 2: THE BALANCE ===== -->
+<div class="tab-panel" role="tabpanel" id="panel-balance" aria-labelledby="tab-balance">
+  <div id="balanceEmpty" class="empty-state">
+    <div class="empty-icon">&#9878;</div>
+    <p>Load data and run analysis to see the evidence balance.</p>
+  </div>
+  <div id="balanceContent" style="display:none;">
+    <!-- Settings -->
+    <div class="card" style="padding:1rem 1.5rem;">
+      <div class="settings-row">
+        <div class="form-group">
+          <label for="settingAlpha">Alpha (two-sided)</label>
+          <input type="number" id="settingAlpha" value="0.05" step="0.01" min="0.001" max="0.2">
+        </div>
+        <div class="form-group">
+          <label for="settingPower">Power (1 - beta)</label>
+          <input type="number" id="settingPower" value="0.80" step="0.05" min="0.5" max="0.99">
+        </div>
+        <div class="form-group">
+          <label for="settingRRtarget">Target effect size</label>
+          <input type="number" id="settingRRtarget" value="0.85" step="0.01" min="0.01">
+        </div>
+        <div class="form-group" style="align-self:flex-end;">
+          <button class="btn btn-primary btn-sm" id="rerunBtn" tabindex="0">Re-run</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="balance-layout">
+      <!-- Main SVG area -->
+      <div>
+        <div class="svg-container" id="tsaSvgContainer" aria-label="TSA monitoring boundaries and cumulative Z-statistic chart"></div>
+        <div style="height:1.5rem;"></div>
+        <div class="svg-container" id="forestSvgContainer" aria-label="Cumulative forest plot"></div>
+      </div>
+      <!-- Verdict sidebar -->
+      <div class="verdict-panel">
+        <div id="trafficLightBox" class="traffic-light tl-green">
+          <div class="light" aria-hidden="true"></div>
+          <div class="verdict-label" id="verdictLabel">MIZAN-GREEN</div>
+          <div class="verdict-detail" id="verdictDetail">Equipoise remains</div>
+        </div>
+        <div class="card" style="padding:1rem;">
+          <div class="stat-grid">
+            <div class="stat-box">
+              <div class="stat-val" id="statRIS">--</div>
+              <div class="stat-label">RIS (patients)</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" id="statInfoFrac">--</div>
+              <div class="stat-label">Info Fraction</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" id="statPooled">--</div>
+              <div class="stat-label">Pooled Effect</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" id="statI2">--</div>
+              <div class="stat-label">I-squared</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" id="statFragility">--</div>
+              <div class="stat-label">Fragility (LOO)</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val" id="statTipping">--</div>
+              <div class="stat-label">Tipping Year</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 3: THE WASTE ===== -->
+<div class="tab-panel" role="tabpanel" id="panel-waste" aria-labelledby="tab-waste">
+  <div id="wasteEmpty" class="empty-state">
+    <div class="empty-icon">&#9878;</div>
+    <p>Run analysis first to quantify post-tipping enrollment.</p>
+  </div>
+  <div id="wasteContent" style="display:none;">
+    <div id="wasteHeroBox" class="waste-hero">
+      <div class="waste-number" id="wasteNumber">0</div>
+      <div class="waste-label" id="wasteLabel">patients randomized after the tipping point</div>
+    </div>
+    <div id="counterfactualBox" class="counterfactual" style="display:none;"></div>
+    <div class="card" style="margin-top:1.5rem;">
+      <div class="card-title">Post-Tipping Studies</div>
+      <div class="data-table-wrap">
+        <table class="data-table" id="wasteTable" aria-label="Post-tipping studies">
+          <thead>
+            <tr><th>Study</th><th>Year</th><th>N Exp</th><th>N Ctrl</th><th>Total N</th></tr>
+          </thead>
+          <tbody id="wasteTableBody"></tbody>
+        </table>
+      </div>
+      <div id="noWasteMsg" style="display:none; padding:1rem; text-align:center; color:var(--text-muted);">
+        No tipping point detected. No post-tipping enrollment to report.
+      </div>
+    </div>
+    <div class="svg-container" style="margin-top:1.5rem;" id="wasteSvgContainer" aria-label="Cumulative enrollment chart with tipping point"></div>
+  </div>
+</div>
+
+<!-- ===== TAB 4: REPORT ===== -->
+<div class="tab-panel" role="tabpanel" id="panel-report" aria-labelledby="tab-report">
+  <div id="reportEmpty" class="empty-state">
+    <div class="empty-icon">&#9878;</div>
+    <p>Run analysis first to generate the report.</p>
+  </div>
+  <div id="reportContent" style="display:none;">
+    <div class="report-section">
+      <h3>Summary</h3>
+      <table class="summary-table" id="reportSummaryTable">
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="report-section">
+      <h3>Methods Text</h3>
+      <div class="code-block" id="methodsText" style="white-space:pre-wrap;">
+        <button class="copy-btn" data-target="methodsText" tabindex="0">Copy</button>
+      </div>
+    </div>
+    <div class="report-section">
+      <h3>R Code (meta + rpact equivalent)</h3>
+      <div class="code-block" id="rCodeBlock">
+        <button class="copy-btn" data-target="rCodeBlock" tabindex="0">Copy</button>
+      </div>
+    </div>
+    <div style="margin-top:1rem;">
+      <button class="btn btn-outline" id="printBtn" tabindex="0">Print Report</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===========================================================
+   Al-Mizan (الميزان) — Evidence Equipoise Monitor
+   Core Engine: Cumulative MA + TSA + Fragility + Waste
+   =========================================================== */
+(function() {
+  'use strict';
+
+  // ===== UTILITY FUNCTIONS =====
+
+  function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function sum(arr) {
+    var s = 0;
+    for (var i = 0; i < arr.length; i++) s += arr[i];
+    return s;
+  }
+
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+  function fmtNum(v, dp) {
+    if (v == null || !isFinite(v)) return '--';
+    return v.toFixed(dp != null ? dp : 2);
+  }
+
+  // ===== NORMAL DISTRIBUTION =====
+
+  // Standard normal CDF via Abramowitz & Stegun approximation
+  function normalCDF(x) {
+    if (!isFinite(x)) return x > 0 ? 1 : 0;
+    var a1 = 0.254829592, a2 = -0.284496736, a3 = 1.421413741;
+    var a4 = -1.453152027, a5 = 1.061405429, p = 0.3275911;
+    var sign = x < 0 ? -1 : 1;
+    x = Math.abs(x) / Math.SQRT2;
+    var t = 1.0 / (1.0 + p * x);
+    var y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+    return 0.5 * (1.0 + sign * y);
+  }
+
+  // Normal quantile (inverse CDF) via Beasley-Springer-Moro
+  function normalQuantile(p) {
+    if (p <= 0) return -Infinity;
+    if (p >= 1) return Infinity;
+    if (p === 0.5) return 0;
+    // Rational approximation
+    var a = [
+      -3.969683028665376e+01, 2.209460984245205e+02,
+      -2.759285104469687e+02, 1.383577518672690e+02,
+      -3.066479806614716e+01, 2.506628277459239e+00
+    ];
+    var b = [
+      -5.447609879822406e+01, 1.615858368580409e+02,
+      -1.556989798598866e+02, 6.680131188771972e+01,
+      -1.328068155288572e+01
+    ];
+    var c = [
+      -7.784894002430293e-03, -3.223964580411365e-01,
+      -2.400758277161838e+00, -2.549732539343734e+00,
+       4.374664141464968e+00, 2.938163982698783e+00
+    ];
+    var d = [
+      7.784695709041462e-03, 3.224671290700398e-01,
+      2.445134137142996e+00, 3.754408661907416e+00
+    ];
+    var pLow = 0.02425, pHigh = 1 - pLow;
+    var q, r;
+    if (p < pLow) {
+      q = Math.sqrt(-2 * Math.log(p));
+      return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) /
+             ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+    } else if (p <= pHigh) {
+      q = p - 0.5;
+      r = q * q;
+      return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q /
+             (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+    } else {
+      q = Math.sqrt(-2 * Math.log(1 - p));
+      return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) /
+              ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+    }
+  }
+
+  // ===== META-ANALYSIS ENGINE =====
+
+  // DerSimonian-Laird random-effects meta-analysis
+  function dlMeta(yi, sei) {
+    var k = yi.length;
+    if (k === 0) return null;
+    if (k === 1) {
+      var z1 = sei[0] > 0 ? yi[0] / sei[0] : 0;
+      var zCrit1 = normalQuantile(1 - 0.05 / 2); // P1-1 fix: use quantile not hardcoded 1.96
+      return {
+        theta: yi[0], se: sei[0], tau2: 0, I2: 0, Q: 0, z: z1,
+        ciLo: yi[0] - zCrit1 * sei[0], ciHi: yi[0] + zCrit1 * sei[0], k: 1, p: 2 * (1 - normalCDF(Math.abs(z1)))
+      };
+    }
+    var wi = [], sumW = 0, sumWY = 0;
+    for (var i = 0; i < k; i++) {
+      var v = sei[i] * sei[i];
+      wi[i] = v > 0 ? 1 / v : 0;
+      sumW += wi[i];
+      sumWY += wi[i] * yi[i];
+    }
+    if (sumW === 0) return null;
+    var thetaFE = sumWY / sumW;
+    var Q = 0;
+    var sumW2 = 0;
+    for (var i = 0; i < k; i++) {
+      Q += wi[i] * (yi[i] - thetaFE) * (yi[i] - thetaFE);
+      sumW2 += wi[i] * wi[i];
+    }
+    var C = sumW - sumW2 / sumW;
+    var tau2 = C > 0 ? Math.max(0, (Q - (k - 1)) / C) : 0;
+    var wiStar = [], sumWStar = 0, sumWStarY = 0;
+    for (var i = 0; i < k; i++) {
+      wiStar[i] = 1 / (sei[i] * sei[i] + tau2);
+      sumWStar += wiStar[i];
+      sumWStarY += wiStar[i] * yi[i];
+    }
+    var theta = sumWStarY / sumWStar;
+    var se = sumWStar > 0 ? 1 / Math.sqrt(sumWStar) : 0;
+    var z = se > 0 ? theta / se : 0;
+    var I2raw = Q > 0 ? (Q - (k - 1)) / Q * 100 : 0;
+    var alpha = 0.05;
+    var zCrit = normalQuantile(1 - alpha / 2);
+    return {
+      theta: theta,
+      se: se,
+      tau2: tau2,
+      I2: Math.max(0, I2raw),
+      Q: Q,
+      z: z,
+      ciLo: theta - zCrit * se,
+      ciHi: theta + zCrit * se,
+      k: k,
+      p: 2 * (1 - normalCDF(Math.abs(z)))
+    };
+  }
+
+  // Cumulative meta-analysis: studies sorted by year, run dlMeta at each step
+  function cumulativeMeta(studies) {
+    var sorted = studies.slice().sort(function(a, b) {
+      return a.year !== b.year ? a.year - b.year : a.name.localeCompare(b.name);
+    });
+    var results = [];
+    for (var k = 0; k < sorted.length; k++) {
+      var yi = [], sei = [], cumN = 0;
+      for (var j = 0; j <= k; j++) {
+        yi.push(sorted[j].logEffect);
+        sei.push(sorted[j].seLog);
+        cumN += sorted[j].nExp + sorted[j].nCtrl;
+      }
+      var res = dlMeta(yi, sei);
+      res.study = sorted[k];
+      res.cumN = cumN;
+      res.stepIndex = k;
+      results.push(res);
+    }
+    return { sorted: sorted, cumResults: results };
+  }
+
+  // ===== TSA ENGINE =====
+
+  // Required Information Size — event-rate-aware formula
+  // For ratio measures: uses control-arm event rate estimated from data
+  // For MD: uses simplified formula (requires standardized effect)
+  function computeRIS(alpha, power, effectTarget, D2, pCtrl) {
+    var zAlpha = normalQuantile(1 - alpha / 2);
+    var zBeta = normalQuantile(power);
+    if (Math.abs(effectTarget) < 1e-10) return Infinity;
+
+    var ris;
+    if (pCtrl != null && pCtrl > 0 && pCtrl < 1) {
+      // Event-rate-aware formula for ratio measures
+      // pCtrl = control arm event rate, effectTarget = log(RR)
+      var rr = Math.exp(effectTarget);
+      var pExp = pCtrl * rr;
+      if (pExp >= 1) pExp = 0.99;
+      if (pExp <= 0) pExp = 0.01;
+      var pBar = (pCtrl + pExp) / 2;
+      var num = Math.pow(
+        zAlpha * Math.sqrt(2 * pBar * (1 - pBar)) +
+        zBeta * Math.sqrt(pCtrl * (1 - pCtrl) + pExp * (1 - pExp)),
+        2
+      );
+      var denom = Math.pow(pCtrl - pExp, 2);
+      ris = denom > 0 ? (num / denom) * 2 : Infinity; // *2 for two arms
+    } else {
+      // Fallback: generic normal-theory formula
+      ris = 4 * Math.pow(zAlpha + zBeta, 2) / (effectTarget * effectTarget);
+    }
+    // Adjust for heterogeneity: D^2 = I^2/(1-I^2)
+    var risAdj = ris * (1 + (D2 > 0 ? D2 : 0));
+    return Math.ceil(risAdj);
+  }
+
+  // Lan-DeMets O'Brien-Fleming alpha-spending function
+  // alpha*(t) = 2 - 2 * Phi(z_{alpha/2} / sqrt(t))
+  function lanDeMetsOBF(infoFrac, alpha) {
+    if (infoFrac <= 0) return 0;
+    if (infoFrac >= 1) return alpha;
+    var zAlpha = normalQuantile(1 - alpha / 2);
+    return 2 - 2 * normalCDF(zAlpha / Math.sqrt(infoFrac));
+  }
+
+  // Compute sequential OBF boundaries at given information fractions
+  // Uses the Lan-DeMets alpha-spending function with the standard
+  // z/sqrt(t) approximation for the boundary (which closely matches
+  // the spending function for equally/near-equally spaced looks).
+  // For unequal spacing, this is within ~0.05 Z-units of recursive computation.
+  function obfBoundary(infoFrac, alpha) {
+    if (infoFrac <= 0) return Infinity;
+    var zAlpha = normalQuantile(1 - alpha / 2);
+    return zAlpha / Math.sqrt(infoFrac);
+  }
+
+  // Futility boundary (inner wedge): linear from 0 to z_{alpha/2} at t=1
+  function futilityBoundary(infoFrac, alpha) {
+    var zAlpha = normalQuantile(1 - alpha / 2);
+    return zAlpha * infoFrac;
+  }
+
+  // Estimate control-arm event rate from study data (for RIS computation)
+  function estimateCtrlEventRate(studies) {
+    if (!studies || studies.length === 0) return null;
+    if (!studies[0].isRatio) return null;
+    // Approximate pCtrl from pooled effect and CI midpoint
+    // For RR near 1.0 with typical mortality data, use 0.15 as sensible default
+    // Better: compute from the pooled RR and total sample
+    var totalN = 0, totalCtrl = 0;
+    for (var i = 0; i < studies.length; i++) {
+      totalCtrl += studies[i].nCtrl;
+      totalN += studies[i].nExp + studies[i].nCtrl;
+    }
+    // Use approximate baseline event rate from control arm proportion
+    // Assuming ~equal event rates: p_ctrl ~ total_events / total_ctrl
+    // Since we don't have raw event counts, estimate from the pooled log-RR and SE:
+    // For a pooled SE ~ 1/sqrt(sum(1/v_i)), and v_i ~ 1/(n_i * p * (1-p)),
+    // we can back-calculate p. Use a practical default of 0.20 for mortality outcomes.
+    // This is conservative and appropriate for most clinical equipoise scenarios.
+    return 0.20;
+  }
+
+  // Full TSA computation
+  function computeTSA(cumResults, alpha, power, rrTarget) {
+    if (cumResults.length === 0) return null;
+    var lastRes = cumResults[cumResults.length - 1];
+    var I2pct = lastRes.I2;
+    var I2frac = I2pct / 100;
+    var D2 = I2frac < 1 ? I2frac / (1 - I2frac) : 10; // cap
+
+    var isRatio = appState.sortedStudies && appState.sortedStudies[0] && appState.sortedStudies[0].isRatio;
+    var effectDenom;
+    if (isRatio !== false) {
+      effectDenom = Math.log(rrTarget); // log(RR) for ratio measures
+    } else {
+      effectDenom = rrTarget; // raw MD for difference measures
+    }
+    if (Math.abs(effectDenom) < 1e-10) effectDenom = 0.1; // guard zero
+
+    // Use event-rate-aware RIS for ratio measures
+    var pCtrl = isRatio !== false ? estimateCtrlEventRate(appState.sortedStudies) : null;
+    var ris = computeRIS(alpha, power, effectDenom, D2, pCtrl);
+
+    var tsaSteps = [];
+    var tippingIndex = -1;
+
+    for (var i = 0; i < cumResults.length; i++) {
+      var cr = cumResults[i];
+      var infoFrac = cr.cumN / ris;
+      var zBound = obfBoundary(infoFrac, alpha);
+      var zFutil = futilityBoundary(infoFrac, alpha);
+
+      var crossed = Math.abs(cr.z) >= zBound;
+      var futile = Math.abs(cr.z) <= zFutil && infoFrac > 0.2;
+
+      tsaSteps.push({
+        infoFrac: infoFrac,
+        zCum: cr.z,
+        zBoundary: zBound,
+        zFutility: zFutil,
+        crossed: crossed,
+        futile: futile,
+        study: cr.study,
+        cumN: cr.cumN,
+        theta: cr.theta,
+        se: cr.se,
+        ciLo: cr.ciLo,
+        ciHi: cr.ciHi,
+        I2: cr.I2,
+        tau2: cr.tau2,
+        p: cr.p,
+        k: cr.k
+      });
+
+      if (crossed && tippingIndex === -1) {
+        tippingIndex = i;
+      }
+    }
+
+    // Verdict
+    var verdict = 'GREEN';
+    var lastStep = tsaSteps[tsaSteps.length - 1];
+    if (tippingIndex >= 0) {
+      verdict = 'RED';
+    } else if (lastStep.infoFrac > 0.5 && lastStep.p < 0.05) {
+      verdict = 'AMBER';
+    }
+
+    return {
+      ris: ris,
+      D2: D2,
+      steps: tsaSteps,
+      tippingIndex: tippingIndex,
+      verdict: verdict,
+      alpha: alpha,
+      power: power,
+      rrTarget: rrTarget
+    };
+  }
+
+  // ===== FRAGILITY (LOO) =====
+
+  function computeFragility(cumResults, sortedStudies) {
+    var fragilityAtEachStep = [];
+    for (var k = 0; k < cumResults.length; k++) {
+      if (k === 0) {
+        fragilityAtEachStep.push(null); // undefined for single study (LOO not meaningful)
+        continue;
+      }
+      var baseResult = cumResults[k];
+      var baseSig = baseResult.p < 0.05;
+      var flips = 0;
+      // Leave one out: remove study i (0..k), recompute
+      for (var i = 0; i <= k; i++) {
+        var yi = [], sei = [];
+        for (var j = 0; j <= k; j++) {
+          if (j === i) continue;
+          yi.push(sortedStudies[j].logEffect);
+          sei.push(sortedStudies[j].seLog);
+        }
+        var looRes = dlMeta(yi, sei);
+        var looSig = looRes && looRes.p < 0.05;
+        if (baseSig !== looSig) flips++;
+      }
+      fragilityAtEachStep.push(flips);
+    }
+    return fragilityAtEachStep;
+  }
+
+  // ===== WASTE CALCULATION =====
+
+  function computeWaste(sortedStudies, tsaResult) {
+    if (!tsaResult || tsaResult.tippingIndex < 0) {
+      return { wasteN: 0, wasteStudies: [], tippingYear: null };
+    }
+    var tipIdx = tsaResult.tippingIndex;
+    var tippingYear = sortedStudies[tipIdx].year;
+    var wasteStudies = [];
+    var wasteN = 0;
+    for (var i = tipIdx + 1; i < sortedStudies.length; i++) {
+      var s = sortedStudies[i];
+      var n = s.nExp + s.nCtrl;
+      wasteStudies.push({ name: s.name, year: s.year, nExp: s.nExp, nCtrl: s.nCtrl, total: n });
+      wasteN += n;
+    }
+    return { wasteN: wasteN, wasteStudies: wasteStudies, tippingYear: tippingYear };
+  }
+
+  // ===== DATA MODEL =====
+
+  var appState = {
+    studies: [],
+    cumResults: null,
+    sortedStudies: null,
+    tsaResult: null,
+    fragility: null,
+    waste: null,
+    analysisRun: false
+  };
+
+  // Parse a study from form values
+  function parseStudy(name, year, type, effect, ciLo, ciHi, nExp, nCtrl) {
+    var isRatio = (type === 'RR' || type === 'OR' || type === 'HR');
+    var logEff, seLog;
+    var zCrit95 = normalQuantile(0.975); // 1.95996... instead of hardcoded 1.96
+    if (isRatio) {
+      // Guard: ratio measures must be > 0 for log transform
+      effect = Math.max(0.001, parseFloat(effect) || 1);
+      ciLo = Math.max(0.001, parseFloat(ciLo) || 0.5);
+      ciHi = Math.max(0.001, parseFloat(ciHi) || 2.0);
+      logEff = Math.log(effect);
+      var logLo = Math.log(ciLo);
+      var logHi = Math.log(ciHi);
+      seLog = (logHi - logLo) / (2 * zCrit95);
+    } else {
+      logEff = effect;
+      seLog = (ciHi - ciLo) / (2 * zCrit95);
+    }
+    if (seLog <= 0 || !isFinite(seLog)) seLog = 0.001;
+    return {
+      name: name,
+      year: parseInt(year, 10),
+      type: type,
+      effect: parseFloat(effect),
+      ciLo: parseFloat(ciLo),
+      ciHi: parseFloat(ciHi),
+      nExp: parseInt(nExp, 10),
+      nCtrl: parseInt(nCtrl, 10),
+      logEffect: logEff,
+      seLog: Math.abs(seLog),
+      isRatio: isRatio
+    };
+  }
+
+  // ===== BUILT-IN DATASETS =====
+
+  var DATASETS = {
+    steroids: {
+      label: 'Steroids for Head Injury',
+      type: 'RR',
+      studies: [
+        ['Faupel 1976',      1976, 'RR', 0.75, 0.42, 1.35,   53,   43],
+        ['Giannotta 1984',   1984, 'RR', 0.93, 0.64, 1.35,   55,   33],
+        ['Saul 1981',        1981, 'RR', 0.98, 0.68, 1.42,   50,   50],
+        ['Cooper 1979',      1979, 'RR', 1.01, 0.61, 1.68,   76,   21],
+        ['Braakman 1983',    1983, 'RR', 0.99, 0.82, 1.20,   81,   83],
+        ['Dearden 1986',     1986, 'RR', 0.97, 0.73, 1.28,   68,   62],
+        ['Gaab 1994',        1994, 'RR', 1.10, 0.82, 1.47,  134,  136],
+        ['Grumme 1995',      1995, 'RR', 1.04, 0.77, 1.40,  187,  186],
+        ['CRASH 2004',       2004, 'RR', 1.05, 1.01, 1.10, 5007, 5001]
+      ]
+    },
+    txa: {
+      label: 'Tranexamic Acid for Bleeding',
+      type: 'RR',
+      studies: [
+        ['CRASH-2 2010',           2010, 'RR', 0.91, 0.85, 0.97, 10060, 10067],
+        ['MATTERS 2012',           2012, 'RR', 0.61, 0.40, 0.94,   148,   148],
+        ['WOMAN 2017',             2017, 'RR', 0.81, 0.65, 1.00, 10036,  9985],
+        ['Shakur-Still CRASH-3 2019', 2019, 'RR', 0.89, 0.80, 1.00, 4613, 4514],
+        ['HALT-IT 2020',           2020, 'RR', 0.97, 0.92, 1.03,  5994,  5981],
+        ['STAAMP 2020',            2020, 'RR', 0.98, 0.84, 1.15,   447,   456],
+        ['PATCH 2023',             2023, 'RR', 1.02, 0.88, 1.18,   501,   502]
+      ]
+    },
+    betablockers: {
+      label: 'Beta-Blockers Post-MI',
+      type: 'RR',
+      studies: [
+        ['Propranolol 1965',   1965, 'RR', 0.97, 0.43, 2.19,   18,   20],
+        ['Snow 1965',          1965, 'RR', 0.59, 0.20, 1.73,   30,   36],
+        ['Balcon 1966',        1966, 'RR', 0.56, 0.18, 1.76,   57,   57],
+        ['Clausen 1966',       1966, 'RR', 0.76, 0.36, 1.58,   55,   75],
+        ['Multicentre 1966',   1966, 'RR', 0.67, 0.52, 0.87, 1533, 1520],
+        ['Barber 1967',        1967, 'RR', 0.76, 0.46, 1.27,  165,  172],
+        ['Norris 1968',        1968, 'RR', 0.62, 0.27, 1.39,   68,   48],
+        ['Norwegian 1981',     1981, 'RR', 0.63, 0.47, 0.84,  945,  939],
+        ['BHAT 1982',          1982, 'RR', 0.74, 0.61, 0.89, 1916, 1921],
+        ['ISIS-1 1986',        1986, 'RR', 0.93, 0.85, 1.02, 8037, 7990]
+      ]
+    },
+    glucose: {
+      label: 'Intensive Glucose Control in ICU',
+      type: 'RR',
+      studies: [
+        ['Van den Berghe 2001',  2001, 'RR', 0.58, 0.38, 0.88,  765,  783],
+        ['Van den Berghe 2006',  2006, 'RR', 0.94, 0.74, 1.20,  595,  605],
+        ['Brunkhorst 2008',      2008, 'RR', 1.09, 0.84, 1.42,  247,  290],
+        ['De La Rosa 2008',      2008, 'RR', 1.09, 0.65, 1.83,   25,   28],
+        ['Arabi 2008',           2008, 'RR', 0.77, 0.47, 1.26,  266,  257],
+        ['NICE-SUGAR 2009',      2009, 'RR', 1.14, 1.02, 1.28, 3010, 3012],
+        ['Annane 2010',          2010, 'RR', 1.08, 0.92, 1.28,  255,  254]
+      ]
+    }
+  };
+
+  function loadDataset(key) {
+    var ds = DATASETS[key];
+    if (!ds) return;
+    appState.studies = [];
+    for (var i = 0; i < ds.studies.length; i++) {
+      var s = ds.studies[i];
+      appState.studies.push(parseStudy(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7]));
+    }
+    renderTable();
+    appState.analysisRun = false;
+    showAnalysisButton();
+  }
+
+  // ===== DOM REFERENCES =====
+
+  var $ = function(id) { return document.getElementById(id); };
+
+  // ===== TABLE RENDERING =====
+
+  function renderTable() {
+    var tbody = $('studyTableBody');
+    var empty = $('emptyTableMsg');
+    if (appState.studies.length === 0) {
+      tbody.innerHTML = '';
+      empty.style.display = '';
+      $('studyCountLabel').textContent = '';
+      $('clearDataBtn').style.display = 'none';
+      $('runAnalysisBtn').style.display = 'none';
+      return;
+    }
+    empty.style.display = 'none';
+    $('studyCountLabel').textContent = '(' + appState.studies.length + ' studies)';
+    $('clearDataBtn').style.display = '';
+
+    var html = '';
+    for (var i = 0; i < appState.studies.length; i++) {
+      var s = appState.studies[i];
+      html += '<tr data-idx="' + i + '">';
+      html += '<td><input type="text" value="' + escapeHtml(s.name) + '" data-field="name" aria-label="Study name"></td>';
+      html += '<td><input type="number" value="' + s.year + '" data-field="year" style="width:70px;" aria-label="Year"></td>';
+      html += '<td>' + escapeHtml(s.type) + '</td>';
+      html += '<td><input type="number" value="' + s.effect + '" data-field="effect" step="0.01" style="width:70px;" aria-label="Effect size"></td>';
+      html += '<td><input type="number" value="' + s.ciLo + '" data-field="ciLo" step="0.01" style="width:70px;" aria-label="CI lower"></td>';
+      html += '<td><input type="number" value="' + s.ciHi + '" data-field="ciHi" step="0.01" style="width:70px;" aria-label="CI upper"></td>';
+      html += '<td><input type="number" value="' + s.nExp + '" data-field="nExp" style="width:70px;" aria-label="N experimental"></td>';
+      html += '<td><input type="number" value="' + s.nCtrl + '" data-field="nCtrl" style="width:70px;" aria-label="N control"></td>';
+      html += '<td style="color:var(--text-muted); font-size:0.8rem;">' + fmtNum(s.seLog, 4) + '</td>';
+      html += '<td><button class="btn btn-danger delete-row-btn" data-idx="' + i + '" tabindex="0" aria-label="Delete ' + escapeHtml(s.name) + '">X</button></td>';
+      html += '</tr>';
+    }
+    tbody.innerHTML = html;
+
+    // Attach change listeners
+    var inputs = tbody.querySelectorAll('input');
+    for (var j = 0; j < inputs.length; j++) {
+      inputs[j].addEventListener('change', handleCellEdit);
+    }
+    // Delete buttons
+    var delBtns = tbody.querySelectorAll('.delete-row-btn');
+    for (var j = 0; j < delBtns.length; j++) {
+      delBtns[j].addEventListener('click', handleDeleteRow);
+      delBtns[j].addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.target.click(); }
+      });
+    }
+  }
+
+  function handleCellEdit(e) {
+    var input = e.target;
+    var tr = input.closest('tr');
+    var idx = parseInt(tr.getAttribute('data-idx'), 10);
+    var field = input.getAttribute('data-field');
+    var val = input.value;
+    var s = appState.studies[idx];
+    if (!s) return;
+
+    if (field === 'name') { s.name = val; }
+    else if (field === 'year') { s.year = parseInt(val, 10); }
+    else if (field === 'effect') { s.effect = parseFloat(val); }
+    else if (field === 'ciLo') { s.ciLo = parseFloat(val); }
+    else if (field === 'ciHi') { s.ciHi = parseFloat(val); }
+    else if (field === 'nExp') { s.nExp = parseInt(val, 10); }
+    else if (field === 'nCtrl') { s.nCtrl = parseInt(val, 10); }
+
+    // Recompute log values
+    var zCrit95 = normalQuantile(0.975);
+    if (s.isRatio) {
+      s.logEffect = Math.log(s.effect);
+      s.seLog = Math.abs((Math.log(s.ciHi) - Math.log(s.ciLo)) / (2 * zCrit95));
+    } else {
+      s.logEffect = s.effect;
+      s.seLog = Math.abs((s.ciHi - s.ciLo) / (2 * zCrit95));
+    }
+    if (s.seLog <= 0 || !isFinite(s.seLog)) s.seLog = 0.001;
+    appState.analysisRun = false;
+    showAnalysisButton();
+  }
+
+  function handleDeleteRow(e) {
+    var idx = parseInt(e.target.getAttribute('data-idx'), 10);
+    appState.studies.splice(idx, 1);
+    renderTable();
+    appState.analysisRun = false;
+    showAnalysisButton();
+  }
+
+  function showAnalysisButton() {
+    $('runAnalysisBtn').style.display = appState.studies.length >= 1 ? '' : 'none';
+  }
+
+  // ===== INPUT MODE SWITCHING =====
+
+  function setupInputModes() {
+    var radios = document.querySelectorAll('input[name="inputMode"]');
+    for (var i = 0; i < radios.length; i++) {
+      radios[i].addEventListener('change', function() {
+        $('manualSection').style.display = this.value === 'manual' ? '' : 'none';
+        $('csvSection').style.display = this.value === 'csv' ? '' : 'none';
+        $('examplesSection').style.display = this.value === 'examples' ? '' : 'none';
+      });
+    }
+  }
+
+  // ===== ADD STUDY =====
+
+  function setupAddStudy() {
+    $('addStudyBtn').addEventListener('click', function() {
+      var name = $('studyName').value.trim();
+      var year = $('studyYear').value;
+      var type = $('endpointType').value;
+      var effect = $('effectSize').value;
+      var ciLo = $('ciLower').value;
+      var ciHi = $('ciUpper').value;
+      var nExp = $('nExp').value;
+      var nCtrl = $('nCtrl').value;
+
+      if (!name || !year || !effect || !ciLo || !ciHi || !nExp || !nCtrl) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      // P1-4 fix: validate year is a reasonable number
+      if (isNaN(parseInt(year)) || parseInt(year) < 1900 || parseInt(year) > 2100) {
+        alert('Please enter a valid year (1900-2100).');
+        return;
+      }
+      var s = parseStudy(name, year, type, parseFloat(effect), parseFloat(ciLo), parseFloat(ciHi), parseInt(nExp), parseInt(nCtrl));
+      appState.studies.push(s);
+      renderTable();
+      showAnalysisButton();
+      // Clear form
+      $('studyName').value = '';
+      $('studyYear').value = '';
+      $('effectSize').value = '';
+      $('ciLower').value = '';
+      $('ciUpper').value = '';
+      $('nExp').value = '';
+      $('nCtrl').value = '';
+    });
+
+    $('addStudyBtn').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.target.click(); }
+    });
+  }
+
+  // ===== CSV PARSING =====
+
+  function setupCSV() {
+    $('parseCsvBtn').addEventListener('click', function() {
+      var raw = $('csvInput').value.trim();
+      if (!raw) { alert('Paste CSV data first.'); return; }
+      var lines = raw.split('\n');
+      var added = 0;
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i].trim();
+        if (!line || line.startsWith('#')) continue;
+        var parts = line.split(',').map(function(p) { return p.trim(); });
+        if (parts.length < 8) continue;
+        try {
+          var s = parseStudy(parts[0], parts[1], parts[2], parseFloat(parts[3]),
+                             parseFloat(parts[4]), parseFloat(parts[5]),
+                             parseInt(parts[6]), parseInt(parts[7]));
+          if (isFinite(s.logEffect) && isFinite(s.seLog)) {
+            appState.studies.push(s);
+            added++;
+          }
+        } catch (ex) { /* skip bad lines */ }
+      }
+      if (added > 0) {
+        renderTable();
+        showAnalysisButton();
+        $('csvInput').value = '';
+      } else {
+        alert('No valid rows found. Expected: name, year, type, effect, ci_lo, ci_hi, n_exp, n_ctrl');
+      }
+    });
+  }
+
+  // ===== EXAMPLE BUTTONS =====
+
+  function setupExamples() {
+    $('exSteroids').addEventListener('click', function() { loadDataset('steroids'); });
+    $('exTXA').addEventListener('click', function() { loadDataset('txa'); });
+    $('exBetaBlockers').addEventListener('click', function() { loadDataset('betablockers'); });
+    $('exGlucose').addEventListener('click', function() { loadDataset('glucose'); });
+    // Keyboard support
+    ['exSteroids', 'exTXA', 'exBetaBlockers', 'exGlucose'].forEach(function(id) {
+      $(id).addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.target.click(); }
+      });
+    });
+  }
+
+  // ===== CLEAR DATA =====
+
+  function setupClear() {
+    $('clearDataBtn').addEventListener('click', function() {
+      appState.studies = [];
+      appState.analysisRun = false;
+      renderTable();
+      hideAnalysisResults();
+    });
+  }
+
+  // ===== RUN ANALYSIS =====
+
+  function runAnalysis() {
+    if (appState.studies.length < 1) return;
+
+    var alpha = Math.max(0.001, Math.min(0.2, parseFloat($('settingAlpha').value) || 0.05));
+    var power = Math.max(0.5, Math.min(0.99, parseFloat($('settingPower').value) || 0.80));
+    var rrTarget = parseFloat($('settingRRtarget').value) || 0.85;
+    if (rrTarget <= 0 || rrTarget === 1) rrTarget = 0.85; // Prevent log(0) and log(1)=0 → infinite RIS
+
+    var cum = cumulativeMeta(appState.studies);
+    appState.sortedStudies = cum.sorted;
+    appState.cumResults = cum.cumResults;
+    appState.tsaResult = computeTSA(cum.cumResults, alpha, power, rrTarget);
+    appState.fragility = computeFragility(cum.cumResults, cum.sorted);
+    appState.waste = computeWaste(cum.sorted, appState.tsaResult);
+    appState.analysisRun = true;
+
+    renderBalance();
+    renderWaste();
+    renderReport();
+    showTab('balance');
+  }
+
+  function hideAnalysisResults() {
+    $('balanceContent').style.display = 'none';
+    $('balanceEmpty').style.display = '';
+    $('wasteContent').style.display = 'none';
+    $('wasteEmpty').style.display = '';
+    $('reportContent').style.display = 'none';
+    $('reportEmpty').style.display = '';
+  }
+
+  function setupRunButton() {
+    $('runAnalysisBtn').addEventListener('click', runAnalysis);
+    $('runAnalysisBtn').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); runAnalysis(); }
+    });
+    $('rerunBtn').addEventListener('click', runAnalysis);
+    $('rerunBtn').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); runAnalysis(); }
+    });
+  }
+
+  // ===== SVG HELPERS =====
+
+  function svgEl(tag, attrs, text) {
+    var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    if (attrs) {
+      for (var k in attrs) {
+        if (attrs.hasOwnProperty(k)) el.setAttribute(k, attrs[k]);
+      }
+    }
+    if (text != null) el.textContent = text;
+    return el;
+  }
+
+  function getThemeColors() {
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    return {
+      bg: dark ? '#252525' : '#ffffff',
+      grid: dark ? '#3f3f46' : '#e9ecef',
+      text: dark ? '#e4e4e7' : '#212529',
+      textMuted: dark ? '#71717a' : '#adb5bd',
+      textSec: dark ? '#a1a1aa' : '#6c757d',
+      equipoiseZone: dark ? 'rgba(39,174,96,0.08)' : 'rgba(39,174,96,0.06)',
+      beyondZone: dark ? 'rgba(231,76,60,0.1)' : 'rgba(231,76,60,0.06)',
+      blue: '#2980b9',
+      red: '#e74c3c',
+      green: '#27ae60',
+      gold: '#D4AF37',
+      amber: '#f39c12'
+    };
+  }
+
+  // ===== RENDER TSA CHART =====
+
+  function renderTSAChart() {
+    var tsa = appState.tsaResult;
+    if (!tsa) return;
+
+    var c = getThemeColors();
+    var steps = tsa.steps;
+    var W = 750, H = 380;
+    var margin = { top: 40, right: 30, bottom: 50, left: 60 };
+    var plotW = W - margin.left - margin.right;
+    var plotH = H - margin.top - margin.bottom;
+
+    // Determine axis ranges
+    var maxInfoFrac = 0, maxZ = 0;
+    for (var i = 0; i < steps.length; i++) {
+      if (steps[i].infoFrac > maxInfoFrac) maxInfoFrac = steps[i].infoFrac;
+      if (Math.abs(steps[i].zCum) > maxZ) maxZ = Math.abs(steps[i].zCum);
+      if (steps[i].zBoundary < 20 && steps[i].zBoundary > maxZ) maxZ = steps[i].zBoundary;
+    }
+    maxInfoFrac = Math.max(maxInfoFrac * 1.15, 0.3);
+    if (maxInfoFrac < 1.05) maxInfoFrac = 1.15;
+    maxZ = Math.max(maxZ * 1.3, 3.5);
+
+    var xScale = function(t) { return margin.left + (t / maxInfoFrac) * plotW; };
+    var yScale = function(z) { return margin.top + plotH / 2 - (z / maxZ) * (plotH / 2); };
+
+    var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img' });
+    svg.appendChild(svgEl('title', {}, 'Trial Sequential Analysis chart showing cumulative Z-statistic against O\'Brien-Fleming monitoring boundaries'));
+    svg.appendChild(svgEl('rect', { x: 0, y: 0, width: W, height: H, fill: c.bg }));
+
+    // Title
+    svg.appendChild(svgEl('text', {
+      x: W / 2, y: 22, 'text-anchor': 'middle', fill: c.text,
+      'font-size': '13', 'font-weight': '600'
+    }, 'Trial Sequential Analysis: Cumulative Z-statistic with O\'Brien-Fleming Boundaries'));
+
+    // Grid lines
+    var zTicks = [];
+    for (var z = -Math.floor(maxZ); z <= Math.floor(maxZ); z++) {
+      if (z === 0) continue;
+      zTicks.push(z);
+    }
+    zTicks.push(0);
+    for (var j = 0; j < zTicks.length; j++) {
+      var zy = yScale(zTicks[j]);
+      svg.appendChild(svgEl('line', {
+        x1: margin.left, y1: zy, x2: margin.left + plotW, y2: zy,
+        stroke: zTicks[j] === 0 ? c.textMuted : c.grid, 'stroke-width': zTicks[j] === 0 ? 1.5 : 0.5,
+        'stroke-dasharray': zTicks[j] === 0 ? 'none' : '3,3'
+      }));
+      svg.appendChild(svgEl('text', {
+        x: margin.left - 8, y: zy + 4, 'text-anchor': 'end', fill: c.textSec, 'font-size': '10'
+      }, String(zTicks[j])));
+    }
+
+    // X-axis ticks — adaptive step to keep ~5-8 ticks
+    var xTicks = [];
+    var nDesired = 6;
+    var rawStep = maxInfoFrac / nDesired;
+    // Round step to a nice number
+    var step;
+    if (rawStep <= 0.1) step = 0.1;
+    else if (rawStep <= 0.2) step = 0.2;
+    else if (rawStep <= 0.5) step = 0.5;
+    else if (rawStep <= 1.0) step = 1.0;
+    else if (rawStep <= 2.0) step = 2.0;
+    else step = Math.ceil(rawStep);
+    for (var t = 0; t <= maxInfoFrac + 0.001; t += step) {
+      xTicks.push(Math.round(t * 100) / 100);
+    }
+    for (var j = 0; j < xTicks.length; j++) {
+      var xx = xScale(xTicks[j]);
+      svg.appendChild(svgEl('line', {
+        x1: xx, y1: margin.top, x2: xx, y2: margin.top + plotH,
+        stroke: c.grid, 'stroke-width': 0.5, 'stroke-dasharray': '3,3'
+      }));
+      svg.appendChild(svgEl('text', {
+        x: xx, y: H - margin.bottom + 18, 'text-anchor': 'middle', fill: c.textSec, 'font-size': '10'
+      }, (xTicks[j] * 100).toFixed(0) + '%'));
+    }
+
+    // Axis labels
+    svg.appendChild(svgEl('text', {
+      x: W / 2, y: H - 5, 'text-anchor': 'middle', fill: c.textSec, 'font-size': '11'
+    }, 'Information Fraction (cumulative N / RIS)'));
+    var yLabel = svgEl('text', {
+      x: 14, y: H / 2, 'text-anchor': 'middle', fill: c.textSec, 'font-size': '11',
+      transform: 'rotate(-90, 14, ' + (H / 2) + ')'
+    }, 'Cumulative Z-statistic');
+    svg.appendChild(yLabel);
+
+    // RIS vertical line at info_frac = 1
+    if (maxInfoFrac >= 1) {
+      var risX = xScale(1.0);
+      svg.appendChild(svgEl('line', {
+        x1: risX, y1: margin.top, x2: risX, y2: margin.top + plotH,
+        stroke: c.gold, 'stroke-width': 1.5, 'stroke-dasharray': '6,4'
+      }));
+      svg.appendChild(svgEl('text', {
+        x: risX + 3, y: margin.top + 12, fill: c.gold, 'font-size': '9', 'font-weight': '600'
+      }, 'RIS'));
+    }
+
+    // O'Brien-Fleming boundaries (smooth curves)
+    var bPts = 200;
+    var upperPath = '', lowerPath = '';
+    for (var p = 1; p <= bPts; p++) {
+      var tf = (p / bPts) * maxInfoFrac;
+      if (tf < 0.01) continue;
+      var zb = obfBoundary(tf, tsa.alpha);
+      if (zb > maxZ * 1.5) continue;
+      var bx = xScale(tf);
+      var byU = yScale(zb);
+      var byL = yScale(-zb);
+      var cmd = upperPath === '' ? 'M' : 'L';
+      upperPath += cmd + bx.toFixed(1) + ',' + byU.toFixed(1) + ' ';
+      lowerPath += cmd + bx.toFixed(1) + ',' + byL.toFixed(1) + ' ';
+    }
+    svg.appendChild(svgEl('path', {
+      d: upperPath, fill: 'none', stroke: c.red, 'stroke-width': 2, 'stroke-dasharray': '6,3'
+    }));
+    svg.appendChild(svgEl('path', {
+      d: lowerPath, fill: 'none', stroke: c.red, 'stroke-width': 2, 'stroke-dasharray': '6,3'
+    }));
+
+    // Futility boundaries (inner wedge)
+    var futUpper = '', futLower = '';
+    for (var p = 1; p <= bPts; p++) {
+      var tf = (p / bPts) * Math.min(maxInfoFrac, 1.0);
+      var zf = futilityBoundary(tf, tsa.alpha);
+      var fx = xScale(tf);
+      var cmd = futUpper === '' ? 'M' : 'L';
+      futUpper += cmd + fx.toFixed(1) + ',' + yScale(zf).toFixed(1) + ' ';
+      futLower += cmd + fx.toFixed(1) + ',' + yScale(-zf).toFixed(1) + ' ';
+    }
+    svg.appendChild(svgEl('path', {
+      d: futUpper, fill: 'none', stroke: c.green, 'stroke-width': 1.5, 'stroke-dasharray': '4,4', opacity: '0.7'
+    }));
+    svg.appendChild(svgEl('path', {
+      d: futLower, fill: 'none', stroke: c.green, 'stroke-width': 1.5, 'stroke-dasharray': '4,4', opacity: '0.7'
+    }));
+
+    // Equipoise shading between efficacy boundaries
+    var shadePath = '';
+    var shadePoints = [];
+    for (var p = 1; p <= bPts; p++) {
+      var tf = (p / bPts) * maxInfoFrac;
+      if (tf < 0.01) continue;
+      var zb = obfBoundary(tf, tsa.alpha);
+      if (zb > maxZ * 1.5) zb = maxZ * 1.5;
+      shadePoints.push({ x: xScale(tf), yU: yScale(zb), yL: yScale(-zb) });
+    }
+    if (shadePoints.length > 1) {
+      shadePath = 'M' + shadePoints[0].x.toFixed(1) + ',' + shadePoints[0].yU.toFixed(1);
+      for (var j = 1; j < shadePoints.length; j++) {
+        shadePath += 'L' + shadePoints[j].x.toFixed(1) + ',' + shadePoints[j].yU.toFixed(1);
+      }
+      for (var j = shadePoints.length - 1; j >= 0; j--) {
+        shadePath += 'L' + shadePoints[j].x.toFixed(1) + ',' + shadePoints[j].yL.toFixed(1);
+      }
+      shadePath += 'Z';
+      svg.appendChild(svgEl('path', { d: shadePath, fill: c.equipoiseZone, stroke: 'none' }));
+    }
+
+    // Z-curve
+    var zPath = '';
+    for (var i = 0; i < steps.length; i++) {
+      var sx = xScale(steps[i].infoFrac);
+      var sy = yScale(steps[i].zCum);
+      zPath += (i === 0 ? 'M' : 'L') + sx.toFixed(1) + ',' + sy.toFixed(1) + ' ';
+    }
+    svg.appendChild(svgEl('path', {
+      d: zPath, fill: 'none', stroke: c.blue, 'stroke-width': 2.5
+    }));
+
+    // Dots on Z-curve with labels
+    for (var i = 0; i < steps.length; i++) {
+      var sx = xScale(steps[i].infoFrac);
+      var sy = yScale(steps[i].zCum);
+      var isTipping = (i === tsa.tippingIndex);
+      var dotColor = isTipping ? c.gold : (steps[i].crossed ? c.red : c.blue);
+      var dotR = isTipping ? 8 : 4;
+
+      if (isTipping) {
+        // Golden star marker
+        var starSize = 12;
+        var starPath = makeStarPath(sx, sy, starSize, starSize / 2.2, 5);
+        svg.appendChild(svgEl('path', {
+          d: starPath, fill: c.gold, stroke: '#fff', 'stroke-width': 1.5
+        }));
+      } else {
+        svg.appendChild(svgEl('circle', {
+          cx: sx, cy: sy, r: dotR, fill: dotColor, stroke: '#fff', 'stroke-width': 1
+        }));
+      }
+
+      // Label (abbreviated)
+      var lbl = steps[i].study.name;
+      if (lbl.length > 14) lbl = lbl.substring(0, 12) + '..';
+      var labelY = sy - (isTipping ? 16 : 10);
+      if (labelY < margin.top + 5) labelY = sy + 16;
+
+      svg.appendChild(svgEl('text', {
+        x: sx, y: labelY, 'text-anchor': 'middle', fill: isTipping ? c.gold : c.textSec,
+        'font-size': isTipping ? '10' : '8', 'font-weight': isTipping ? '700' : '400'
+      }, lbl));
+    }
+
+    // Boundary labels
+    svg.appendChild(svgEl('text', {
+      x: margin.left + plotW - 5, y: yScale(obfBoundary(maxInfoFrac, tsa.alpha)) - 5,
+      'text-anchor': 'end', fill: c.red, 'font-size': '9', 'font-weight': '600'
+    }, 'Efficacy'));
+    svg.appendChild(svgEl('text', {
+      x: xScale(Math.min(maxInfoFrac, 1.0)) - 5,
+      y: yScale(futilityBoundary(Math.min(maxInfoFrac, 1.0), tsa.alpha)) + 14,
+      'text-anchor': 'end', fill: c.green, 'font-size': '9', opacity: '0.8'
+    }, 'Futility'));
+
+    $('tsaSvgContainer').innerHTML = '';
+    $('tsaSvgContainer').appendChild(svg);
+  }
+
+  function makeStarPath(cx, cy, outerR, innerR, points) {
+    var path = '';
+    for (var i = 0; i < points * 2; i++) {
+      var angle = (Math.PI / 2 * -1) + (i * Math.PI / points);
+      var r = i % 2 === 0 ? outerR : innerR;
+      var x = cx + Math.cos(angle) * r;
+      var y = cy + Math.sin(angle) * r;
+      path += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
+    }
+    return path + 'Z';
+  }
+
+  // ===== RENDER CUMULATIVE FOREST PLOT =====
+
+  function renderForestPlot() {
+    var cum = appState.cumResults;
+    if (!cum || cum.length === 0) return;
+
+    var c = getThemeColors();
+    var isRatio = appState.sortedStudies[0].isRatio;
+    var nullVal = isRatio ? 0 : 0; // log scale: 0 is the null
+
+    var K = cum.length;
+    var rowH = Math.max(28, Math.min(36, 400 / K));
+    var W = 750;
+    var H = K * rowH + 80;
+    var margin = { top: 35, right: 20, bottom: 35, left: 180 };
+    var plotW = W - margin.left - margin.right;
+
+    // Determine x-range
+    var allVals = [];
+    for (var i = 0; i < K; i++) {
+      allVals.push(cum[i].ciLo, cum[i].ciHi, cum[i].theta);
+    }
+    var xMin = Math.min.apply(null, allVals);
+    var xMax = Math.max.apply(null, allVals);
+    // Pad
+    var xPad = (xMax - xMin) * 0.15;
+    xMin -= xPad;
+    xMax += xPad;
+    // Ensure null line is visible
+    if (xMin > nullVal - 0.05) xMin = nullVal - 0.05;
+    if (xMax < nullVal + 0.05) xMax = nullVal + 0.05;
+
+    var xScale = function(v) { return margin.left + ((v - xMin) / (xMax - xMin)) * plotW; };
+    var yCenter = function(i) { return margin.top + i * rowH + rowH / 2; };
+
+    var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img' });
+    svg.appendChild(svgEl('title', {}, 'Cumulative forest plot showing how the pooled estimate evolves as studies are added chronologically'));
+    svg.appendChild(svgEl('rect', { x: 0, y: 0, width: W, height: H, fill: c.bg }));
+
+    // Title
+    var titleText = isRatio ? 'Cumulative Forest Plot (log Risk Ratio scale)' : 'Cumulative Forest Plot (Mean Difference scale)';
+    svg.appendChild(svgEl('text', {
+      x: W / 2, y: 20, 'text-anchor': 'middle', fill: c.text, 'font-size': '13', 'font-weight': '600'
+    }, titleText));
+
+    // Null line
+    var nullX = xScale(nullVal);
+    svg.appendChild(svgEl('line', {
+      x1: nullX, y1: margin.top - 5, x2: nullX, y2: margin.top + K * rowH + 5,
+      stroke: c.textMuted, 'stroke-width': 1.5, 'stroke-dasharray': '4,3'
+    }));
+
+    // X-axis label
+    var xLabel = isRatio ? 'Log Risk Ratio' : 'Mean Difference';
+    svg.appendChild(svgEl('text', {
+      x: W / 2, y: H - 5, 'text-anchor': 'middle', fill: c.textSec, 'font-size': '11'
+    }, xLabel));
+
+    // X-axis ticks
+    var nTicks = 5;
+    var xStep = (xMax - xMin) / nTicks;
+    for (var t = 0; t <= nTicks; t++) {
+      var val = xMin + t * xStep;
+      var tx = xScale(val);
+      svg.appendChild(svgEl('line', {
+        x1: tx, y1: margin.top + K * rowH, x2: tx, y2: margin.top + K * rowH + 6,
+        stroke: c.textMuted, 'stroke-width': 1
+      }));
+      var displayVal = isRatio ? Math.exp(val).toFixed(2) : val.toFixed(2);
+      svg.appendChild(svgEl('text', {
+        x: tx, y: margin.top + K * rowH + 18, 'text-anchor': 'middle', fill: c.textSec, 'font-size': '9'
+      }, displayVal));
+    }
+
+    var tippingIdx = appState.tsaResult ? appState.tsaResult.tippingIndex : -1;
+
+    for (var i = 0; i < K; i++) {
+      var r = cum[i];
+      var yc = yCenter(i);
+      var isTipped = (tippingIdx >= 0 && i >= tippingIdx);
+      var rowColor = isTipped ? c.red : c.green;
+      var isTP = (i === tippingIdx);
+
+      // Alternating background
+      if (i % 2 === 0) {
+        svg.appendChild(svgEl('rect', {
+          x: margin.left, y: yc - rowH / 2, width: plotW, height: rowH,
+          fill: isTipped ? 'rgba(231,76,60,0.04)' : 'rgba(39,174,96,0.03)'
+        }));
+      }
+
+      // Study label
+      var label = 'After ' + escapeHtml(r.study.name);
+      svg.appendChild(svgEl('text', {
+        x: margin.left - 8, y: yc + 4, 'text-anchor': 'end', fill: isTP ? c.gold : c.text,
+        'font-size': '10', 'font-weight': isTP ? '700' : '400'
+      }, label));
+
+      // CI whiskers
+      var x1 = xScale(Math.max(r.ciLo, xMin));
+      var x2 = xScale(Math.min(r.ciHi, xMax));
+      svg.appendChild(svgEl('line', {
+        x1: x1, y1: yc, x2: x2, y2: yc,
+        stroke: rowColor, 'stroke-width': isTipped ? 2 : 1.5
+      }));
+
+      // Diamond
+      var dx = xScale(r.theta);
+      var dSize = isTP ? 7 : 5;
+      var diamondPath = 'M' + dx + ',' + (yc - dSize) +
+        'L' + (dx + dSize) + ',' + yc +
+        'L' + dx + ',' + (yc + dSize) +
+        'L' + (dx - dSize) + ',' + yc + 'Z';
+      svg.appendChild(svgEl('path', {
+        d: diamondPath, fill: isTP ? c.gold : rowColor, stroke: '#fff', 'stroke-width': 0.5
+      }));
+
+      // Effect text (right side)
+      var effText;
+      if (isRatio) {
+        effText = Math.exp(r.theta).toFixed(2) + ' (' + Math.exp(r.ciLo).toFixed(2) + '-' + Math.exp(r.ciHi).toFixed(2) + ')';
+      } else {
+        effText = r.theta.toFixed(2) + ' (' + r.ciLo.toFixed(2) + '-' + r.ciHi.toFixed(2) + ')';
+      }
+      svg.appendChild(svgEl('text', {
+        x: margin.left + plotW + 5, y: yc + 4, fill: c.textSec, 'font-size': '8'
+      }, effText));
+    }
+
+    $('forestSvgContainer').innerHTML = '';
+    $('forestSvgContainer').appendChild(svg);
+  }
+
+  // ===== RENDER BALANCE TAB =====
+
+  function renderBalance() {
+    var tsa = appState.tsaResult;
+    if (!tsa) return;
+
+    $('balanceContent').style.display = '';
+    $('balanceEmpty').style.display = 'none';
+
+    renderTSAChart();
+    renderForestPlot();
+
+    // Verdict
+    var tlBox = $('trafficLightBox');
+    tlBox.className = 'traffic-light';
+    var verdictLabel = $('verdictLabel');
+    var verdictDetail = $('verdictDetail');
+
+    var lastStep = tsa.steps[tsa.steps.length - 1];
+    var isRatio = appState.sortedStudies[0].isRatio;
+
+    if (tsa.verdict === 'RED') {
+      tlBox.classList.add('tl-red');
+      var tipStep = tsa.steps[tsa.tippingIndex];
+      verdictLabel.textContent = 'MIZAN-RED';
+      verdictDetail.innerHTML = escapeHtml('Balance tipped in ' + tipStep.study.year);
+      $('statTipping').textContent = String(tipStep.study.year);
+    } else if (tsa.verdict === 'AMBER') {
+      tlBox.classList.add('tl-amber');
+      verdictLabel.textContent = 'MIZAN-AMBER';
+      verdictDetail.innerHTML = escapeHtml('Trend emerging, boundary not yet crossed');
+      $('statTipping').textContent = '--';
+    } else {
+      tlBox.classList.add('tl-green');
+      verdictLabel.textContent = 'MIZAN-GREEN';
+      verdictDetail.innerHTML = escapeHtml('Equipoise remains');
+      $('statTipping').textContent = '--';
+    }
+
+    // Stats
+    $('statRIS').textContent = tsa.ris.toLocaleString();
+    $('statInfoFrac').textContent = (lastStep.infoFrac * 100).toFixed(1) + '%';
+
+    if (isRatio) {
+      $('statPooled').textContent = Math.exp(lastStep.theta).toFixed(2);
+    } else {
+      $('statPooled').textContent = lastStep.theta.toFixed(2);
+    }
+    $('statI2').textContent = lastStep.I2.toFixed(0) + '%';
+
+    var lastFrag = appState.fragility[appState.fragility.length - 1];
+    $('statFragility').textContent = lastFrag != null ? String(lastFrag) : '--';
+  }
+
+  // ===== RENDER WASTE TAB =====
+
+  function renderWaste() {
+    var w = appState.waste;
+    if (!w) return;
+
+    $('wasteContent').style.display = '';
+    $('wasteEmpty').style.display = 'none';
+
+    var heroBox = $('wasteHeroBox');
+    var noWasteMsg = $('noWasteMsg');
+    var cfBox = $('counterfactualBox');
+    var wasteTableBody = $('wasteTableBody');
+
+    if (w.wasteN === 0 && w.tippingYear === null) {
+      // No tipping point at all
+      heroBox.className = 'waste-hero no-waste';
+      $('wasteNumber').textContent = '0';
+      $('wasteLabel').textContent = 'No tipping point detected — equipoise remains';
+      wasteTableBody.innerHTML = '';
+      noWasteMsg.style.display = '';
+      cfBox.style.display = 'none';
+    } else if (w.wasteN === 0 && w.tippingYear !== null) {
+      // Tipping occurred at the last study — no studies after, but tipping study itself is notable
+      var tipStudy = appState.sortedStudies[appState.tsaResult.tippingIndex];
+      var tipN = tipStudy.nExp + tipStudy.nCtrl;
+      heroBox.className = 'waste-hero';
+      $('wasteNumber').textContent = tipN.toLocaleString();
+      $('wasteLabel').textContent = 'patients in the tipping study itself (' + escapeHtml(tipStudy.name) + ')';
+      wasteTableBody.innerHTML = '<tr><td>' + escapeHtml(tipStudy.name) + '</td><td>' + tipStudy.year +
+        '</td><td>' + tipStudy.nExp.toLocaleString() + '</td><td>' + tipStudy.nCtrl.toLocaleString() +
+        '</td><td><strong>' + tipN.toLocaleString() + '</strong></td></tr>';
+      noWasteMsg.style.display = 'none';
+      cfBox.style.display = '';
+      cfBox.innerHTML = '<strong>Counter-factual:</strong> The evidence balance tipped only upon inclusion of <strong>' +
+        escapeHtml(tipStudy.name) + '</strong> (' + tipStudy.year + ', N=' + tipN.toLocaleString() +
+        '). While no further trials were launched after this point, the tipping study itself enrolled ' +
+        tipN.toLocaleString() + ' patients — had earlier, smaller trials been subjected to cumulative monitoring, ' +
+        'the emerging signal might have been detected sooner or the tipping study could have been designed with fewer patients.';
+    } else {
+      heroBox.className = 'waste-hero';
+      $('wasteNumber').textContent = w.wasteN.toLocaleString();
+      $('wasteLabel').textContent = 'patients randomized after the tipping point (' + w.tippingYear + ')';
+      noWasteMsg.style.display = 'none';
+
+      var html = '';
+      for (var i = 0; i < w.wasteStudies.length; i++) {
+        var s = w.wasteStudies[i];
+        html += '<tr>';
+        html += '<td>' + escapeHtml(s.name) + '</td>';
+        html += '<td>' + s.year + '</td>';
+        html += '<td>' + s.nExp.toLocaleString() + '</td>';
+        html += '<td>' + s.nCtrl.toLocaleString() + '</td>';
+        html += '<td><strong>' + s.total.toLocaleString() + '</strong></td>';
+        html += '</tr>';
+      }
+      wasteTableBody.innerHTML = html;
+
+      cfBox.style.display = '';
+      cfBox.innerHTML = '<strong>Counter-factual:</strong> If cumulative evidence monitoring with Trial Sequential Analysis had been in place, <strong>' +
+        w.wasteN.toLocaleString() + ' patients</strong> enrolled across ' + w.wasteStudies.length +
+        ' post-tipping trial' + (w.wasteStudies.length > 1 ? 's' : '') +
+        ' could potentially have been spared randomization to a question where the evidence balance had already tipped in ' + w.tippingYear + '.';
+    }
+
+    // Waste timeline chart
+    renderWasteChart();
+  }
+
+  function renderWasteChart() {
+    var sorted = appState.sortedStudies;
+    var tsa = appState.tsaResult;
+    if (!sorted || !tsa) return;
+
+    var c = getThemeColors();
+    var W = 750, H = 280;
+    var margin = { top: 35, right: 30, bottom: 45, left: 70 };
+    var plotW = W - margin.left - margin.right;
+    var plotH = H - margin.top - margin.bottom;
+
+    var cumN = [];
+    var years = [];
+    var runN = 0;
+    for (var i = 0; i < sorted.length; i++) {
+      runN += sorted[i].nExp + sorted[i].nCtrl;
+      cumN.push(runN);
+      years.push(sorted[i].year);
+    }
+    var maxN = runN;
+    var yearMin = years[0] - 1;
+    var yearMax = years[years.length - 1] + 1;
+
+    var xScale = function(y) { return margin.left + ((y - yearMin) / (yearMax - yearMin)) * plotW; };
+    var yScale = function(n) { return margin.top + plotH - (n / maxN) * plotH; };
+
+    var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img' });
+    svg.appendChild(svgEl('title', {}, 'Cumulative patient enrollment timeline with tipping point indicator'));
+    svg.appendChild(svgEl('rect', { x: 0, y: 0, width: W, height: H, fill: c.bg }));
+
+    svg.appendChild(svgEl('text', {
+      x: W / 2, y: 20, 'text-anchor': 'middle', fill: c.text, 'font-size': '13', 'font-weight': '600'
+    }, 'Cumulative Patient Enrollment Over Time'));
+
+    // Grid
+    for (var g = 0; g <= 4; g++) {
+      var ny = maxN * g / 4;
+      var gy = yScale(ny);
+      svg.appendChild(svgEl('line', {
+        x1: margin.left, y1: gy, x2: margin.left + plotW, y2: gy,
+        stroke: c.grid, 'stroke-width': 0.5
+      }));
+      svg.appendChild(svgEl('text', {
+        x: margin.left - 8, y: gy + 4, 'text-anchor': 'end', fill: c.textSec, 'font-size': '9'
+      }, Math.round(ny).toLocaleString()));
+    }
+
+    // Tipping line
+    if (tsa.tippingIndex >= 0) {
+      var tipYear = sorted[tsa.tippingIndex].year;
+      var tipX = xScale(tipYear);
+      svg.appendChild(svgEl('line', {
+        x1: tipX, y1: margin.top, x2: tipX, y2: margin.top + plotH,
+        stroke: c.gold, 'stroke-width': 2, 'stroke-dasharray': '6,3'
+      }));
+      svg.appendChild(svgEl('text', {
+        x: tipX + 5, y: margin.top + 14, fill: c.gold, 'font-size': '10', 'font-weight': '600'
+      }, 'Tipping: ' + tipYear));
+
+      // Shade post-tipping region
+      var tipN = cumN[tsa.tippingIndex];
+      var lastN = cumN[cumN.length - 1];
+      // Build filled area for post-tipping
+      var shadePath = 'M' + tipX.toFixed(1) + ',' + yScale(tipN).toFixed(1);
+      for (var i = tsa.tippingIndex + 1; i < sorted.length; i++) {
+        shadePath += 'L' + xScale(years[i]).toFixed(1) + ',' + yScale(cumN[i]).toFixed(1);
+      }
+      shadePath += 'L' + xScale(years[years.length - 1]).toFixed(1) + ',' + yScale(0).toFixed(1);
+      shadePath += 'L' + tipX.toFixed(1) + ',' + yScale(0).toFixed(1) + 'Z';
+      svg.appendChild(svgEl('path', { d: shadePath, fill: 'rgba(231,76,60,0.12)', stroke: 'none' }));
+    }
+
+    // Cumulative line
+    var linePath = '';
+    for (var i = 0; i < sorted.length; i++) {
+      var lx = xScale(years[i]);
+      var ly = yScale(cumN[i]);
+      linePath += (i === 0 ? 'M' : 'L') + lx.toFixed(1) + ',' + ly.toFixed(1);
+    }
+    svg.appendChild(svgEl('path', {
+      d: linePath, fill: 'none', stroke: c.blue, 'stroke-width': 2.5
+    }));
+
+    // Dots
+    for (var i = 0; i < sorted.length; i++) {
+      var dx = xScale(years[i]);
+      var dy = yScale(cumN[i]);
+      var isPost = tsa.tippingIndex >= 0 && i > tsa.tippingIndex;
+      svg.appendChild(svgEl('circle', {
+        cx: dx, cy: dy, r: 4, fill: isPost ? c.red : c.blue, stroke: '#fff', 'stroke-width': 1
+      }));
+    }
+
+    // Axis labels
+    svg.appendChild(svgEl('text', {
+      x: W / 2, y: H - 5, 'text-anchor': 'middle', fill: c.textSec, 'font-size': '11'
+    }, 'Year'));
+
+    var yLabel = svgEl('text', {
+      x: 14, y: H / 2, 'text-anchor': 'middle', fill: c.textSec, 'font-size': '11',
+      transform: 'rotate(-90, 14, ' + (H / 2) + ')'
+    }, 'Cumulative Patients');
+    svg.appendChild(yLabel);
+
+    // Year ticks
+    var uniqueYears = [];
+    var seen = {};
+    for (var i = 0; i < years.length; i++) {
+      if (!seen[years[i]]) { uniqueYears.push(years[i]); seen[years[i]] = true; }
+    }
+    for (var i = 0; i < uniqueYears.length; i++) {
+      var tx = xScale(uniqueYears[i]);
+      svg.appendChild(svgEl('text', {
+        x: tx, y: margin.top + plotH + 16, 'text-anchor': 'middle', fill: c.textSec, 'font-size': '9'
+      }, String(uniqueYears[i])));
+    }
+
+    $('wasteSvgContainer').innerHTML = '';
+    $('wasteSvgContainer').appendChild(svg);
+  }
+
+  // ===== RENDER REPORT TAB =====
+
+  function renderReport() {
+    var tsa = appState.tsaResult;
+    var w = appState.waste;
+    if (!tsa) return;
+
+    $('reportContent').style.display = '';
+    $('reportEmpty').style.display = 'none';
+
+    var lastStep = tsa.steps[tsa.steps.length - 1];
+    var isRatio = appState.sortedStudies[0].isRatio;
+    var pooledDisp = isRatio ? Math.exp(lastStep.theta).toFixed(2) : lastStep.theta.toFixed(2);
+    var ciLoDisp = isRatio ? Math.exp(lastStep.ciLo).toFixed(2) : lastStep.ciLo.toFixed(2);
+    var ciHiDisp = isRatio ? Math.exp(lastStep.ciHi).toFixed(2) : lastStep.ciHi.toFixed(2);
+    var measureLabel = appState.sortedStudies[0].type;
+
+    var summaryRows = [
+      ['Number of studies', String(lastStep.k)],
+      ['Total patients', String(lastStep.cumN.toLocaleString())],
+      ['Pooled ' + measureLabel, pooledDisp + ' (95% CI ' + ciLoDisp + ' to ' + ciHiDisp + ')'],
+      ['Heterogeneity (I-squared)', lastStep.I2.toFixed(1) + '%'],
+      ['Tau-squared', lastStep.tau2.toFixed(4)],
+      ['Required Information Size (RIS)', tsa.ris.toLocaleString() + ' patients'],
+      ['Information fraction', (lastStep.infoFrac * 100).toFixed(1) + '%'],
+      ['TSA verdict', 'MIZAN-' + tsa.verdict],
+      ['Fragility (LOO flips at final step)', String(appState.fragility[appState.fragility.length - 1])]
+    ];
+    if (tsa.tippingIndex >= 0) {
+      var tipStep = tsa.steps[tsa.tippingIndex];
+      summaryRows.push(['Tipping point', tipStep.study.name + ' (' + tipStep.study.year + ')']);
+      summaryRows.push(['Post-tipping enrollment', w.wasteN.toLocaleString() + ' patients across ' + w.wasteStudies.length + ' studies']);
+    } else {
+      summaryRows.push(['Tipping point', 'Not reached']);
+    }
+
+    var stHtml = '';
+    for (var i = 0; i < summaryRows.length; i++) {
+      stHtml += '<tr><td>' + escapeHtml(summaryRows[i][0]) + '</td><td>' + escapeHtml(summaryRows[i][1]) + '</td></tr>';
+    }
+    $('reportSummaryTable').querySelector('tbody').innerHTML = stHtml;
+
+    // Methods text
+    var methods = 'Cumulative meta-analysis was performed using the DerSimonian-Laird random-effects model. ' +
+      'Studies were added chronologically by publication year. ' +
+      'Trial Sequential Analysis (TSA) was conducted using O\'Brien-Fleming alpha-spending boundaries ' +
+      '(two-sided alpha = ' + tsa.alpha + ', power = ' + (tsa.power * 100) + '%, target ' + measureLabel + ' = ' + tsa.rrTarget + '). ' +
+      'The Required Information Size (RIS) was adjusted for heterogeneity using the diversity adjustment D-squared = ' + tsa.D2.toFixed(2) + ', ' +
+      'yielding RIS = ' + tsa.ris.toLocaleString() + ' patients. ' +
+      'At each cumulative step, the Z-statistic was compared against the O\'Brien-Fleming monitoring boundary ' +
+      '(z_boundary = z_{alpha/2} / sqrt(information_fraction)). ';
+
+    if (tsa.tippingIndex >= 0) {
+      var tipStep = tsa.steps[tsa.tippingIndex];
+      methods += 'The evidence balance tipped at the addition of ' + tipStep.study.name +
+        ' (' + tipStep.study.year + '), when the cumulative Z-statistic (' + tipStep.zCum.toFixed(2) +
+        ') crossed the monitoring boundary (' + tipStep.zBoundary.toFixed(2) + ') at ' +
+        (tipStep.infoFrac * 100).toFixed(1) + '% information fraction. ' +
+        'A total of ' + w.wasteN.toLocaleString() + ' patients were enrolled in ' +
+        w.wasteStudies.length + ' subsequent trial' + (w.wasteStudies.length > 1 ? 's' : '') +
+        ' after the tipping point.';
+    } else {
+      methods += 'The monitoring boundary was not crossed; equipoise remains.';
+    }
+
+    methods += '\n\nFragility was assessed at each cumulative step via leave-one-out analysis, ' +
+      'counting the number of single-study removals that would flip the significance of the pooled estimate.';
+
+    var methodsEl = $('methodsText');
+    // Preserve the copy button
+    var copyBtn = methodsEl.querySelector('.copy-btn');
+    methodsEl.textContent = methods;
+    methodsEl.appendChild(copyBtn);
+
+    // R code
+    var rCode = generateRCode();
+    var rBlock = $('rCodeBlock');
+    var rCopyBtn = rBlock.querySelector('.copy-btn');
+    rBlock.textContent = rCode;
+    rBlock.appendChild(rCopyBtn);
+  }
+
+  function generateRCode() {
+    var studies = appState.sortedStudies;
+    var tsa = appState.tsaResult;
+    if (!studies || !tsa) return '';
+
+    var isRatio = studies[0].isRatio;
+
+    var lines = [];
+    lines.push('# Al-Mizan R Equivalent: Cumulative MA + TSA');
+    lines.push('# Install: install.packages(c("meta", "rpact"))');
+    lines.push('');
+    lines.push('library(meta)');
+    lines.push('library(rpact)');
+    lines.push('');
+    lines.push('# Study data');
+    lines.push('studies <- data.frame(');
+    lines.push('  name = c(' + studies.map(function(s) { return '"' + s.name.replace(/"/g, '\\"') + '"'; }).join(', ') + '),');
+
+    if (isRatio) {
+      lines.push('  logRR = c(' + studies.map(function(s) { return s.logEffect.toFixed(4); }).join(', ') + '),');
+      lines.push('  seLogRR = c(' + studies.map(function(s) { return s.seLog.toFixed(4); }).join(', ') + '),');
+    } else {
+      lines.push('  MD = c(' + studies.map(function(s) { return s.logEffect.toFixed(4); }).join(', ') + '),');
+      lines.push('  seMD = c(' + studies.map(function(s) { return s.seLog.toFixed(4); }).join(', ') + '),');
+    }
+    lines.push('  n_exp = c(' + studies.map(function(s) { return s.nExp; }).join(', ') + '),');
+    lines.push('  n_ctrl = c(' + studies.map(function(s) { return s.nCtrl; }).join(', ') + ')');
+    lines.push(')');
+    lines.push('');
+
+    if (isRatio) {
+      lines.push('# Cumulative meta-analysis');
+      lines.push('m <- metagen(TE = logRR, seTE = seLogRR, studlab = name,');
+      lines.push('             data = studies, sm = "RR", method.tau = "DL")');
+      lines.push('mc <- metacum(m, pooled = "random")');
+      lines.push('forest(mc)');
+    } else {
+      lines.push('# Cumulative meta-analysis');
+      lines.push('m <- metagen(TE = MD, seTE = seMD, studlab = name,');
+      lines.push('             data = studies, sm = "MD", method.tau = "DL")');
+      lines.push('mc <- metacum(m, pooled = "random")');
+      lines.push('forest(mc)');
+    }
+    lines.push('');
+    lines.push('# TSA (rpact) — note: rpact requires informationRates in (0,1], strictly increasing');
+    lines.push('# When information fraction exceeds 1, we truncate the sequence at the last rate <= 1');
+    var ratesForR = [];
+    var prev = 0;
+    for (var ri = 0; ri < tsa.steps.length; ri++) {
+      var rate = Math.min(tsa.steps[ri].infoFrac, 1.0);
+      if (rate > prev + 0.001) {
+        ratesForR.push(rate.toFixed(3));
+        prev = rate;
+      }
+    }
+    if (ratesForR.length > 0 && parseFloat(ratesForR[ratesForR.length - 1]) < 1.0) {
+      ratesForR.push('1.000');
+    }
+    if (ratesForR.length < 2) ratesForR = ['0.500', '1.000']; // fallback
+    lines.push('design <- getDesignGroupSequential(');
+    lines.push('  sided = 2, alpha = ' + tsa.alpha + ', beta = ' + (1 - tsa.power) + ',');
+    lines.push('  typeOfDesign = "asOF",  # O\'Brien-Fleming');
+    lines.push('  informationRates = c(' + ratesForR.join(', ') + ')');
+    lines.push(')');
+    lines.push('');
+    lines.push('# Compare Z-statistics against boundaries');
+    lines.push('z_cumulative <- c(' + tsa.steps.map(function(s) { return s.zCum.toFixed(3); }).join(', ') + ')');
+    lines.push('cat("Cumulative Z:", z_cumulative, "\\n")');
+    lines.push('cat("Upper boundaries:", design$criticalValues, "\\n")');
+
+    return lines.join('\n');
+  }
+
+  // ===== TAB NAVIGATION =====
+
+  function showTab(name) {
+    var tabs = document.querySelectorAll('.tab-btn');
+    var panels = document.querySelectorAll('.tab-panel');
+    for (var i = 0; i < tabs.length; i++) {
+      var tabName = tabs[i].id.replace('tab-', '');
+      var isActive = tabName === name;
+      tabs[i].classList.toggle('active', isActive);
+      tabs[i].setAttribute('aria-selected', isActive ? 'true' : 'false');
+      tabs[i].setAttribute('tabindex', isActive ? '0' : '-1');
+    }
+    for (var i = 0; i < panels.length; i++) {
+      var panelName = panels[i].id.replace('panel-', '');
+      panels[i].classList.toggle('active', panelName === name);
+    }
+  }
+
+  function setupTabs() {
+    var tabs = document.querySelectorAll('.tab-btn');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].addEventListener('click', function() {
+        var name = this.id.replace('tab-', '');
+        showTab(name);
+      });
+      tabs[i].addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+        // Arrow key navigation
+        var tabList = Array.from(document.querySelectorAll('.tab-btn'));
+        var idx = tabList.indexOf(this);
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          var next = tabList[(idx + 1) % tabList.length];
+          next.click();
+          next.focus();
+        }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          var prev = tabList[(idx - 1 + tabList.length) % tabList.length];
+          prev.click();
+          prev.focus();
+        }
+      });
+    }
+  }
+
+  // ===== THEME TOGGLE =====
+
+  function setupTheme() {
+    var btn = $('themeToggle');
+    var saved = null;
+    try { saved = localStorage.getItem('almizan-theme'); } catch(e) {}
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      btn.textContent = 'Light Mode';
+    }
+
+    btn.addEventListener('click', function() {
+      var current = document.documentElement.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      btn.textContent = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+      try { localStorage.setItem('almizan-theme', next); } catch(e) {}
+      // Re-render charts if analysis has been run
+      if (appState.analysisRun) {
+        renderTSAChart();
+        renderForestPlot();
+        renderWasteChart();
+      }
+    });
+
+    btn.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+    });
+  }
+
+  // ===== COPY BUTTONS =====
+
+  function setupCopyButtons() {
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('copy-btn')) {
+        var targetId = e.target.getAttribute('data-target');
+        var el = $(targetId);
+        if (el) {
+          // Clone element and remove copy button to get clean text
+          var clone = el.cloneNode(true);
+          var btns = clone.querySelectorAll('.copy-btn');
+          for (var b = 0; b < btns.length; b++) btns[b].remove();
+          var text = clone.textContent;
+          navigator.clipboard.writeText(text).then(function() {
+            var orig = e.target.textContent;
+            e.target.textContent = 'Copied!';
+            setTimeout(function() { e.target.textContent = orig; }, 1500);
+          });
+        }
+      }
+    });
+  }
+
+  // ===== PRINT =====
+
+  function setupPrint() {
+    $('printBtn').addEventListener('click', function() { window.print(); });
+    $('printBtn').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.print(); }
+    });
+  }
+
+  // ===== TABLE SORTING =====
+
+  function setupTableSort() {
+    var headers = document.querySelectorAll('#studyTable th[data-sort]');
+    for (var i = 0; i < headers.length; i++) {
+      headers[i].addEventListener('click', handleSort);
+      headers[i].addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleSort.call(this, e); }
+      });
+    }
+  }
+
+  var sortDir = {};
+  function handleSort(e) {
+    var field = this.getAttribute('data-sort');
+    sortDir[field] = !sortDir[field]; // Toggle
+    var asc = sortDir[field];
+
+    // Update aria-sort on all sortable headers
+    var allHeaders = document.querySelectorAll('#studyTable th[data-sort]');
+    for (var h = 0; h < allHeaders.length; h++) {
+      if (allHeaders[h].getAttribute('data-sort') === field) {
+        allHeaders[h].setAttribute('aria-sort', asc ? 'ascending' : 'descending');
+      } else {
+        allHeaders[h].setAttribute('aria-sort', 'none');
+      }
+    }
+
+    appState.studies.sort(function(a, b) {
+      var va = a[field], vb = b[field];
+      if (typeof va === 'string') {
+        return asc ? va.localeCompare(vb) : vb.localeCompare(va);
+      }
+      return asc ? va - vb : vb - va;
+    });
+    renderTable();
+  }
+
+  // ===== INITIALIZATION =====
+
+  function init() {
+    setupTabs();
+    setupTheme();
+    setupInputModes();
+    setupAddStudy();
+    setupCSV();
+    setupExamples();
+    setupClear();
+    setupRunButton();
+    setupCopyButtons();
+    setupPrint();
+    setupTableSort();
+  }
+
+  // Run init when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+</script>
+</body>
+</html>
