@@ -3,25 +3,25 @@
   "slug": "al-mizan",
   "author": "Mahmood Ahmad",
   "date": "2026-03-26",
-  "body": "When has accumulating trial evidence already answered a clinical question, and how many participants were subsequently enrolled after equipoise had effectively ended? We built an evidence equipoise monitor that combines cumulative meta-analysis, Trial Sequential Analysis boundaries, leave-one-out fragility checks, and post-tipping waste estimates across three clinical exemplars. Al-Mizan applies O'Brien-Fleming alpha-spending boundaries to the cumulative Z-statistic at each chronological study entry and classifies the evidence state as tipped, trending, or still in equipoise. In corticosteroids for traumatic brain injury, the monitoring boundary was crossed before the CRASH trial randomised 10,008 patients, with post-tipping enrolment associated with a risk ratio of 1.05 (95% CI 1.01 to 1.10). Leave-one-out analyses showed that the corticosteroid and tranexamic acid exemplars were not reversed by removal of any single study. Real-time evidence monitoring could reduce avoidable recruitment into trials that continue after the main question has already been answered. The approach depends on the published evidence base and cannot account for unpublished negative studies or delayed data release.",
-  "word_count": 163,
+  "body": "When has accumulating trial evidence already answered a clinical question, and how many participants were subsequently enrolled after equipoise had ended? We built an evidence equipoise monitor combining cumulative meta-analysis, Trial Sequential Analysis boundaries, leave-one-out fragility checks, and post-tipping waste estimates across three clinical exemplars. Al-Mizan applies O'Brien-Fleming alpha-spending boundaries to the cumulative Z-statistic at each chronological study entry and classifies the evidence state as tipped, trending, or in equipoise. In corticosteroids for traumatic brain injury, the boundary was not crossed before CRASH, which randomised 10,008 patients and shifted the pooled estimate to a risk ratio of 1.05 (95% CI 1.01 to 1.10). Leave-one-out analyses showed that the corticosteroid and tranexamic acid exemplars were not reversed by removal of any single study. Real-time evidence monitoring could reduce avoidable recruitment into trials that continue after the question has been answered. The approach depends on published evidence and cannot account for unpublished negative studies or delayed data release.",
+  "word_count": 156,
   "sentence_count": 7,
   "sentences": [
     {
       "role": "Question",
-      "text": "When has accumulating trial evidence already answered a clinical question, and how many participants were subsequently enrolled after equipoise had effectively ended?"
+      "text": "When has accumulating trial evidence already answered a clinical question, and how many participants were subsequently enrolled after equipoise had ended?"
     },
     {
       "role": "Dataset",
-      "text": "We built an evidence equipoise monitor that combines cumulative meta-analysis, Trial Sequential Analysis boundaries, leave-one-out fragility checks, and post-tipping waste estimates across three clinical exemplars."
+      "text": "We built an evidence equipoise monitor combining cumulative meta-analysis, Trial Sequential Analysis boundaries, leave-one-out fragility checks, and post-tipping waste estimates across three clinical exemplars."
     },
     {
       "role": "Method",
-      "text": "Al-Mizan applies O'Brien-Fleming alpha-spending boundaries to the cumulative Z-statistic at each chronological study entry and classifies the evidence state as tipped, trending, or still in equipoise."
+      "text": "Al-Mizan applies O'Brien-Fleming alpha-spending boundaries to the cumulative Z-statistic at each chronological study entry and classifies the evidence state as tipped, trending, or in equipoise."
     },
     {
       "role": "Primary result",
-      "text": "In corticosteroids for traumatic brain injury, the monitoring boundary was crossed before the CRASH trial randomised 10,008 patients, with post-tipping enrolment associated with a risk ratio of 1.05 (95% CI 1.01 to 1.10)."
+      "text": "In corticosteroids for traumatic brain injury, the boundary was not crossed before CRASH, which randomised 10,008 patients and shifted the pooled estimate to a risk ratio of 1.05 (95% CI 1.01 to 1.10)."
     },
     {
       "role": "Robustness",
@@ -29,11 +29,11 @@
     },
     {
       "role": "Interpretation",
-      "text": "Real-time evidence monitoring could reduce avoidable recruitment into trials that continue after the main question has already been answered."
+      "text": "Real-time evidence monitoring could reduce avoidable recruitment into trials that continue after the question has been answered."
     },
     {
       "role": "Boundary",
-      "text": "The approach depends on the published evidence base and cannot account for unpublished negative studies or delayed data release."
+      "text": "The approach depends on published evidence and cannot account for unpublished negative studies or delayed data release."
     }
   ],
   "notes": {
@@ -49,7 +49,7 @@
   "type": "methods",
   "primary_estimand": "Cumulative Z-statistic crossing Trial Sequential Analysis boundary",
   "validation": {
-    "status": "fail",
+    "status": "pass",
     "checks": [
       {
         "name": "single paragraph",
@@ -63,8 +63,8 @@
       },
       {
         "name": "word count",
-        "ok": false,
-        "detail": "Found 163 words."
+        "ok": true,
+        "detail": "Found 156 words."
       },
       {
         "name": "no headings",

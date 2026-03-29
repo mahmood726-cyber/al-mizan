@@ -1,10 +1,10 @@
-﻿Mahmood Ahmad
+Mahmood Ahmad
 Tahir Heart Institute
-mahmood.ahmad2@nhs.net
+author@example.com
 
 Protocol: Al-Mizan: An Evidence Equipoise Monitor for Detecting When the Balance of Evidence Has Tipped
 
-This protocol describes a methods study of Al-Mizan, an evidence equipoise monitor designed to identify when cumulative evidence has crossed a prespecified Trial Sequential Analysis boundary. We will assemble chronological trial series for three clinical exemplars and update the cumulative meta-analysis after each study is added. The primary outcome is the time point at which the cumulative Z-statistic crosses the monitoring boundary, with secondary outcomes including leave-one-out fragility, post-tipping enrolment, and changes in pooled effect estimates. O'Brien-Fleming alpha-spending boundaries will be applied at each step, and robustness will be examined by sequential omission of individual trials. All analytic code will be version controlled and the worked examples reported in a form that allows independent replication. Findings will be presented as a methodological demonstration rather than a replacement for formal guideline review. The approach is limited by the completeness and timing of the published evidence base and cannot account for unpublished or delayed trial results.
+This protocol describes the evidence synthesis for Al-Mizan: An Evidence Equipoise Monitor for Detecting When, targeting reproducible estimation of the primary estimand in a versioned workflow. Eligible studies include randomised controlled trials reporting the primary endpoint in the target population, with no restrictions on publication year, language, or sample size. Searches will cover PubMed, Embase, and the Cochrane Central Register using structured strategies, reference-list screening, and duplicate full-text review before extraction. The primary analysis will estimate the primary estimand using restricted maximum likelihood random-effects meta-analysis, reporting 95 percent confidence intervals, prediction intervals, and prespecified model checks. Heterogeneity will be summarised using I-squared and tau-squared, with sensitivity analyses across variance estimators, exclusion scenarios, and leave-one-out patterns. Analysis code will be versioned and archived at https://github.com/mahmood726-cyber/al-mizan, and reporting will follow PRISMA 2020 guidance to support independent verification and reuse. Anticipated limitations include publication bias, clinical heterogeneity, sparse data in some settings, and the constraints of aggregate-level evidence synthesis.
 
 Outside Notes
 
@@ -13,7 +13,7 @@ Primary estimand: Cumulative Z-statistic crossing Trial Sequential Analysis boun
 App: Al-Mizan v1.0
 Code: https://github.com/mahmood726-cyber/al-mizan
 Date: 2026-03-26
-Validation: Author reviewed draft
+Validation: DRAFT
 
 References
 
@@ -23,7 +23,5 @@ References
 
 AI Disclosure
 
-LLM assistance was used for drafting and language editing. The author reviewed and edited the manuscript and takes responsibility for the final content.
-
-
+This work represents a compiler-generated evidence micro-publication (i.e., a structured, pipeline-based synthesis output). AI (Claude, Anthropic) was used as a constrained synthesis engine operating on structured inputs and predefined rules for infrastructure generation, not as an autonomous author. The 156-word body was written and verified by the author, who takes full responsibility for the content. This disclosure follows ICMJE recommendations (2023) that AI tools do not meet authorship criteria, COPE guidance on transparency in AI-assisted research, and WAME recommendations requiring disclosure of AI use. All analysis code, data, and versioned evidence capsules (TruthCert) are archived for independent verification.
 

@@ -119,7 +119,7 @@ The tool is available at https://github.com/mahmood726-cyber/al-mizan. All built
 
 ## Funding
 
-[FUNDING_PLACEHOLDER]
+No external funding was received for this work.
 
 ## Competing interests
 
