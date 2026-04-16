@@ -3,8 +3,14 @@ Al-Mizan (الميزان) — Evidence Equipoise Monitor
 Selenium Test Suite: 30 tests covering all 4 tabs, 3 datasets, input methods, and SVG rendering.
 Run: python test_al_mizan.py
 """
-import sys, os, time, io, unittest
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+import io
+import os
+import sys
+import time
+import unittest
+
+if __name__ == "__main__" and hasattr(sys.stdout, "buffer"):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
