@@ -133,7 +133,7 @@ No patients or members of the public were involved in the design of this tool.
 
 1. Freedman B. Equipoise and the ethics of clinical research. N Engl J Med. 1987;317(3):141-145.
 2. Chalmers I. The lethal consequences of failing to make use of all relevant evidence about the effects of medical treatments. J R Soc Med. 2006;99(7):341-345.
-3. CRASH Trial Collaborators. Effect of intravenous corticosteroids on death within 14 days in 10,008 adults with clinically significant head injury. Lancet. 2004;364(9442):1321-1328.
+3. CRASH Trial Collaborators. Effect of intravenous corticosteroids on death within 14 days in 10,008 adults with clinically significant head injury. Lancet. 2004;364(9442):1321-1328. doi:10.1016/S0140-6736(04)17188-2
 4. NICE-SUGAR Study Investigators. Intensive versus conventional glucose control in critically ill patients. N Engl J Med. 2009;360(13):1283-1297.
 5. Wetterslev J, Thorlund K, Brok J, Gluud C. Trial sequential analysis may establish when firm evidence is reached in cumulative meta-analysis. J Clin Epidemiol. 2008;61(1):64-75.
 6. Thorlund K, Engstrom J, Wetterslev J, Brok J, Imberger G, Gluud C. User manual for Trial Sequential Analysis (TSA). Copenhagen Trial Unit; 2011.
