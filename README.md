@@ -1,5 +1,7 @@
 # Al-Mizan
 
+[![ci](https://github.com/mahmood726-cyber/al-mizan/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/mahmood726-cyber/al-mizan/actions/workflows/ci.yml) [![codeql](https://github.com/mahmood726-cyber/al-mizan/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/mahmood726-cyber/al-mizan/actions/workflows/codeql.yml) [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![python: 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
+
 An evidence equipoise monitor: detects when accumulating trial evidence has tipped a question, and estimates how many participants were subsequently enrolled after equipoise ended.
 
 **Live dashboard:** <https://mahmood726-cyber.github.io/almizan/>
