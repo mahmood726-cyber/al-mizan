@@ -1,7 +1,7 @@
 {
   "title": "Al-Mizan: An Evidence Equipoise Monitor for Detecting When the Balance of Evidence Has Tipped",
   "slug": "al-mizan",
-  "path": "C:\\AlMizan",
+  "path": "..",
   "type": "methods",
   "primary_estimand": "Cumulative Z-statistic crossing Trial Sequential Analysis boundary",
   "certainty": "moderate",
