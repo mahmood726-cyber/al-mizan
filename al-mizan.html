@@ -2418,7 +2418,7 @@ textarea { resize: vertical; min-height: 100px; font-family: var(--font-mono); f
     lines.push('');
     lines.push('# Study data');
     lines.push('studies <- data.frame(');
-    lines.push('  name = c(' + studies.map(function(s) { return '"' + s.name.replace(/"/g, '\\"') + '"'; }).join(', ') + '),');
+    lines.push('  name = c(' + studies.map(function(s) { return '"' + s.name.replace(/\/g, '\\').replace(/"/g, '\\"') + '"'; }).join(', ') + '),');
 
     if (isRatio) {
       lines.push('  logRR = c(' + studies.map(function(s) { return s.logEffect.toFixed(4); }).join(', ') + '),');
